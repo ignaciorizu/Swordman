@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b16rx3qn5ttiq"]
 
+[ext_resource type="Texture2D" uid="uid://cny3mjje4hxwl" path="res://src/sprites/playerDown.png" id="1_swhsd"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_if6j7"]
 
 [node name="Player" type="CharacterBody2D" unique_id=776580473]
@@ -8,3 +10,9 @@
 shape = SubResource("RectangleShape2D_if6j7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=751134305]
+position = Vector2(-0.02499926, 0)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_swhsd")
+region_enabled = true
+region_rect = Rect2(1, 1, 57.071426, 57)
+metadata/_edit_group_ = true
