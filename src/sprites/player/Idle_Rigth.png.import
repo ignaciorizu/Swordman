@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clqnejiwhue3k"
-path="res://.godot/imported/playerCutLeft.png-562729bfe943fc537d5f10b807175dd7.ctex"
+uid="uid://blritfoijkl48"
+path="res://.godot/imported/Idle_Rigth.png-e7e16610f1633118d37095e27155e1f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/playerCutLeft.png"
-dest_files=["res://.godot/imported/playerCutLeft.png-562729bfe943fc537d5f10b807175dd7.ctex"]
+source_file="res://src/sprites/player/Idle_Rigth.png"
+dest_files=["res://.godot/imported/Idle_Rigth.png-e7e16610f1633118d37095e27155e1f1.ctex"]
 
 [params]
 

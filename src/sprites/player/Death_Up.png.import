@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlaecly3pydf"
-path="res://.godot/imported/playerCutUp.png-97b7bb74fbe05d840f1f7a844fc2200d.ctex"
+uid="uid://ci0ym2tj2f8yr"
+path="res://.godot/imported/Death_Up.png-7b0f5bec9cb2db32dff5c25be2d78875.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/playerCutUp.png"
-dest_files=["res://.godot/imported/playerCutUp.png-97b7bb74fbe05d840f1f7a844fc2200d.ctex"]
+source_file="res://src/sprites/player/Death_Up.png"
+dest_files=["res://.godot/imported/Death_Up.png-7b0f5bec9cb2db32dff5c25be2d78875.ctex"]
 
 [params]
 

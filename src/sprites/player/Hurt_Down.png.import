@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl5jx4nljdiod"
-path="res://.godot/imported/playerCutDown.png-fa43cd02418ec01cc373925950c1aa54.ctex"
+uid="uid://bhebexmn4mk7x"
+path="res://.godot/imported/Hurt_Down.png-d0fc1603922f134c000bc0af86ed2a4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/playerCutDown.png"
-dest_files=["res://.godot/imported/playerCutDown.png-fa43cd02418ec01cc373925950c1aa54.ctex"]
+source_file="res://src/sprites/player/Hurt_Down.png"
+dest_files=["res://.godot/imported/Hurt_Down.png-d0fc1603922f134c000bc0af86ed2a4a.ctex"]
 
 [params]
 

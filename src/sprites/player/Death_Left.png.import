@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4mmrug6p2438"
-path="res://.godot/imported/playerCutRight.png-24c6256072ad31394144ea5c7e2b2c19.ctex"
+uid="uid://bopq8pley8wua"
+path="res://.godot/imported/Death_Left.png-4bae782d7812ad6b97f0a1b63ed270e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/playerCutRight.png"
-dest_files=["res://.godot/imported/playerCutRight.png-24c6256072ad31394144ea5c7e2b2c19.ctex"]
+source_file="res://src/sprites/player/Death_Left.png"
+dest_files=["res://.godot/imported/Death_Left.png-4bae782d7812ad6b97f0a1b63ed270e9.ctex"]
 
 [params]
 

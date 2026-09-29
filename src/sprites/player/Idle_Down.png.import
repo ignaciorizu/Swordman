@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8c20mixe003b"
-path="res://.godot/imported/playerCutChargeLeft.png-0929666e46d91d7b644a48d95164bd3d.ctex"
+uid="uid://buetkdk03xt74"
+path="res://.godot/imported/Idle_Down.png-d0bb87e03df3265f996da3a4c24c4489.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/playerCutChargeLeft.png"
-dest_files=["res://.godot/imported/playerCutChargeLeft.png-0929666e46d91d7b644a48d95164bd3d.ctex"]
+source_file="res://src/sprites/player/Idle_Down.png"
+dest_files=["res://.godot/imported/Idle_Down.png-d0bb87e03df3265f996da3a4c24c4489.ctex"]
 
 [params]
 
