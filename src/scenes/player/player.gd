@@ -1,26 +1,32 @@
 extends CharacterBody2D
 
-const SPEED: float = 100.0
-var active_direction_name: StringName = &"";
+@onready var _animation_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+const MOVEMENT_SPEED: float = 100.0
+
+var active_movement_input: StringName = &""
+var current_facing_direction: StringName = &"ui_down"
 
 func _input(event: InputEvent) -> void:
-	process_movement_input(event, &"ui_up")
-	process_movement_input(event, &"ui_down")
-	process_movement_input(event, &"ui_left")
-	process_movement_input(event, &"ui_right")
+	process_directional_input(event, &"ui_up")
+	process_directional_input(event, &"ui_down")
+	process_directional_input(event, &"ui_left")
+	process_directional_input(event, &"ui_right")
 
-func process_movement_input(event: InputEvent, action: StringName) -> void:
+func process_directional_input(event: InputEvent, action: StringName) -> void:
 	if event.is_action_pressed(action):
-		active_direction_name = action
-	elif event.is_action_released(action) and active_direction_name == action:
-		active_direction_name = &""
+		active_movement_input = action
+		current_facing_direction = action
+	elif event.is_action_released(action) and active_movement_input == action:
+		active_movement_input = &""
 
-func _physics_process(delta: float) -> void:
-	movePlayer()
+func _physics_process(_delta: float) -> void:
+	update_velocity()
 	move_and_slide()
-	
-func movePlayer() -> void:
-	if active_direction_name.is_empty():
+	dispatch_animation()
+
+func update_velocity() -> void:
+	if active_movement_input.is_empty():
 		velocity = Vector2.ZERO
 		return
 		
@@ -31,5 +37,34 @@ func movePlayer() -> void:
 		&"ui_right": Vector2.RIGHT
 	}
 	
-	var direction_vector: Vector2 = direction_map.get(active_direction_name, Vector2.ZERO)
-	velocity = direction_vector * SPEED
+	var direction_vector: Vector2 = direction_map.get(active_movement_input, Vector2.ZERO)
+	velocity = direction_vector * MOVEMENT_SPEED
+
+func dispatch_animation() -> void:
+	if active_movement_input.is_empty():
+		play_idle_animation()
+	else:
+		play_walk_animation()
+
+func play_idle_animation() -> void:
+	var idle_animation_map := {
+		&"ui_up": &"IdleUp",
+		&"ui_down": &"IdleDown",
+		&"ui_left": &"IdleLeft",
+		&"ui_right": &"IdleRight"
+	}
+	
+	var target_animation: StringName = idle_animation_map.get(current_facing_direction, &"IdleDown")
+		
+	_animation_sprite.play(target_animation)
+	
+func play_walk_animation() -> void:
+	var walk_animation_map := {
+		&"ui_up": &"WalkUp",
+		&"ui_down": &"WalkDown",
+		&"ui_left": &"WalkLeft",
+		&"ui_right": &"WalkRight"
+	}
+	
+	var target_animation: StringName = walk_animation_map.get(current_facing_direction, &"WalkDown")
+	_animation_sprite.play(target_animation)
