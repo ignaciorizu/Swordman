@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var _animation_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const MOVEMENT_SPEED: float = 100.0
+const RUN_SPEED_MULTIPLIER: float = 1.6
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
@@ -38,11 +39,19 @@ func update_velocity() -> void:
 	}
 	
 	var direction_vector: Vector2 = direction_map.get(active_movement_input, Vector2.ZERO)
-	velocity = direction_vector * MOVEMENT_SPEED
+	var velocity_player: float = calculate_movement_speed()
+	velocity = direction_vector * velocity_player
+
+func calculate_movement_speed() -> float:
+	var is_run_pressed: bool = Input.is_action_pressed(&"ui_run")
+
+	return MOVEMENT_SPEED * RUN_SPEED_MULTIPLIER if is_run_pressed else MOVEMENT_SPEED
 
 func dispatch_animation() -> void:
 	if active_movement_input.is_empty():
 		play_idle_animation()
+	elif (Input.is_action_pressed(&"ui_run")):
+		play_run_animation()
 	else:
 		play_walk_animation()
 
@@ -67,4 +76,15 @@ func play_walk_animation() -> void:
 	}
 	
 	var target_animation: StringName = walk_animation_map.get(current_facing_direction, &"WalkDown")
+	_animation_sprite.play(target_animation)
+	
+func play_run_animation() -> void:
+	var run_animation_map := {
+		&"ui_up": &"RunUp",
+		&"ui_down": &"RunDown",
+		&"ui_left": &"RunLeft",
+		&"ui_right": &"RunRight"
+	}
+	
+	var target_animation: StringName = run_animation_map.get(current_facing_direction, &"RunDown")
 	_animation_sprite.play(target_animation)
