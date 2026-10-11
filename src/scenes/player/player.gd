@@ -24,11 +24,9 @@ func _input(event: InputEvent) -> void:
 	process_directional_input(event, &"ui_right")
 
 func process_attack_input(event: InputEvent, action: StringName) -> void:
-	if not event.is_action_pressed(action):
+	if not event.is_action_pressed(action) or is_attacking:
 		return
-	if is_attacking:
-		return
-		
+
 	execute_attack()
 
 func process_directional_input(event: InputEvent, action: StringName) -> void:
@@ -59,13 +57,13 @@ func calculate_direction_vector(input_move: StringName) -> Vector2:
 		&"ui_left": Vector2.LEFT,
 		&"ui_right": Vector2.RIGHT
 	}
-	
+
 	return direction_map.get(input_move, Vector2.ZERO)
 
 func calculate_movement_speed() -> float:
 	if not run_ability_unlock:
 		return MOVEMENT_SPEED
-		
+
 	var is_run_pressed: bool = Input.is_action_pressed(&"ui_run")
 	return MOVEMENT_SPEED * RUN_SPEED_MULTIPLIER if is_run_pressed else MOVEMENT_SPEED
 
@@ -73,21 +71,27 @@ func execute_attack() -> void:
 	is_attacking = true
 	apply_hitbox_transform()
 	_sword_hitbox.set_deferred(&"monitoring", true)
-	
-	var current_state: StringName = &"Idle"
+
+	var current_state: StringName = determine_movement_state()
 	play_contextual_attack_animation(current_state)
 
 func apply_hitbox_transform() -> void:
 	var transform_map := {
-		&"ui_up": {"position": Vector2(0, -HITBOX_OFFSET), "rotation": -PI / 2},
-		&"ui_down": {"position": Vector2(0, HITBOX_OFFSET), "rotation": PI / 2},
-		&"ui_left": {"position": Vector2(-HITBOX_OFFSET, 0), "rotation": PI},
-		&"ui_right": {"position": Vector2(HITBOX_OFFSET, 0), "rotation": 0.0}
+		&"ui_up": {"rotation": 0.0},
+		&"ui_down": {"rotation": PI},
+		&"ui_left": {"rotation": -PI / 2},
+		&"ui_right": {"rotation": PI / 2}
 	}
 	
 	var transform_data: Dictionary = transform_map.get(current_facing_direction, transform_map.get(&"ui_down"))
-	_sword_hitbox.position = transform_data.get("position")
 	_sword_hitbox.rotation = transform_data.get("rotation")
+
+func determine_movement_state() -> StringName:
+	if active_movement_input.is_empty():
+		return &"Idle"
+	if Input.is_action_pressed(&"ui_run") and run_ability_unlock:
+		return &"Run"
+	return &"Walk"
 
 func play_contextual_attack_animation(state: StringName) -> void:
 	var direction_suffix_map := {
