@@ -311,7 +311,7 @@ region = Rect2(320, 192, 64, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_if6j7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_8tvdu")
 }, {
 "duration": 1.0,
@@ -331,7 +331,7 @@ animations = [{
 "speed": 4.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_ef3mv")
 }, {
 "duration": 1.0,
@@ -351,7 +351,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_d7j0y")
 }, {
 "duration": 1.0,
@@ -371,7 +371,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_hafhl")
 }, {
 "duration": 1.0,
@@ -609,7 +609,7 @@ shape = SubResource("RectangleShape2D_if6j7")
 position = Vector2(-4.7683716e-07, -4.7683716e-07)
 scale = Vector2(0.53125, 0.53125)
 sprite_frames = SubResource("SpriteFrames_if6j7")
-animation = &"WalkUp"
+animation = &"IdleRight"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1834465402]
 zoom = Vector2(2, 2)
