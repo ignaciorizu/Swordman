@@ -7,6 +7,7 @@ const RUN_SPEED_MULTIPLIER: float = 1.6
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
+var run_ability_unlock: bool = false
 
 func _input(event: InputEvent) -> void:
 	process_directional_input(event, &"ui_up")
@@ -30,7 +31,12 @@ func update_velocity() -> void:
 	if active_movement_input.is_empty():
 		velocity = Vector2.ZERO
 		return
-		
+	
+	var direction_vector: Vector2 = calculate_direction_vector(active_movement_input)
+	var velocity_player: float = calculate_movement_speed()
+	velocity = direction_vector * velocity_player
+	
+func calculate_direction_vector(input_move: StringName) -> Vector2:
 	var direction_map := {
 		&"ui_up": Vector2.UP,
 		&"ui_down": Vector2.DOWN,
@@ -38,19 +44,18 @@ func update_velocity() -> void:
 		&"ui_right": Vector2.RIGHT
 	}
 	
-	var direction_vector: Vector2 = direction_map.get(active_movement_input, Vector2.ZERO)
-	var velocity_player: float = calculate_movement_speed()
-	velocity = direction_vector * velocity_player
+	return direction_map.get(input_move, Vector2.ZERO)
 
 func calculate_movement_speed() -> float:
-	var is_run_pressed: bool = Input.is_action_pressed(&"ui_run")
-
-	return MOVEMENT_SPEED * RUN_SPEED_MULTIPLIER if is_run_pressed else MOVEMENT_SPEED
+	if run_ability_unlock:
+		var is_run_pressed: bool = Input.is_action_pressed(&"ui_run")
+		return MOVEMENT_SPEED * RUN_SPEED_MULTIPLIER if is_run_pressed else MOVEMENT_SPEED
+	return MOVEMENT_SPEED
 
 func dispatch_animation() -> void:
 	if active_movement_input.is_empty():
 		play_idle_animation()
-	elif (Input.is_action_pressed(&"ui_run")):
+	elif (Input.is_action_pressed(&"ui_run") and run_ability_unlock):
 		play_run_animation()
 	else:
 		play_walk_animation()

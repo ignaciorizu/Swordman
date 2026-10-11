@@ -20,6 +20,18 @@ config/icon="res://icon.svg"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[file_customization]
+
+folder_colors={
+"res://src/": "orange",
+"res://src/scenes/": "yellow",
+"res://src/sprites/": "green"
+}
+
+[global_group]
+
+player=""
+
 [input]
 
 ui_run={

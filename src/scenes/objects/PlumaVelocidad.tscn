@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://d1cdrwtx2mppu"]
+
+[ext_resource type="Script" uid="uid://42xy45q72i85" path="res://src/scenes/objects/pluma_velocidad.gd" id="1_2tsdw"]
+[ext_resource type="Texture2D" uid="uid://bjc6sltcrwbn3" path="res://src/sprites/objects/plumaDeVelocidad.png" id="2_ft2w8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdx7w"]
+
+[node name="PlumaVelocidad" type="Area2D" unique_id=2017869751]
+script = ExtResource("1_2tsdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2114267286]
+position = Vector2(-7.1525574e-07, -4.7683716e-07)
+scale = Vector2(0.37499994, 0.37499994)
+texture = ExtResource("2_ft2w8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=513311060]
+shape = SubResource("RectangleShape2D_pdx7w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
