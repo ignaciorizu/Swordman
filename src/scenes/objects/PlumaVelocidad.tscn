@@ -3,10 +3,45 @@
 [ext_resource type="Script" uid="uid://42xy45q72i85" path="res://src/scenes/objects/pluma_velocidad.gd" id="1_2tsdw"]
 [ext_resource type="Texture2D" uid="uid://bjc6sltcrwbn3" path="res://src/sprites/objects/plumaDeVelocidad.png" id="2_ft2w8"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_if6j7"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_2tsdw"]
+interpolation_mode = 1
+colors = PackedColorArray(0.5411765, 0.16862746, 0.8862745, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6rlec"]
+gradient = SubResource("Gradient_2tsdw")
+
+[sub_resource type="Curve" id="Curve_ft2w8"]
+_limits = [0.0, 1.0, 0.0, 1.5]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1.0232558, 0.5578948), 0.8486838, 0.8486838, 0, 0, Vector2(1.5, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ft2w8"]
+curve = SubResource("Curve_ft2w8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2tsdw"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+gravity = Vector3(0, -15, 0)
+radial_accel_min = -10.000002
+radial_accel_max = 9.999997
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ft2w8")
+color_ramp = SubResource("GradientTexture1D_6rlec")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdx7w"]
 
 [node name="PlumaVelocidad" type="Area2D" unique_id=2017869751]
 script = ExtResource("1_2tsdw")
+
+[node name="CPUParticles2D" type="GPUParticles2D" parent="." unique_id=1401221194]
+material = SubResource("CanvasItemMaterial_if6j7")
+amount = 12
+explosiveness = 0.04
+process_material = SubResource("ParticleProcessMaterial_2tsdw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2114267286]
 position = Vector2(-7.1525574e-07, -4.7683716e-07)

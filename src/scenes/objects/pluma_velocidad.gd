@@ -10,3 +10,4 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _active_player_run(body: Node2D) -> void:
 	body.run_ability_unlock = true
+	queue_free()
