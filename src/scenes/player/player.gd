@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var _animation_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var _sword_hitbox: Area2D = $sword_hitbox
 
-const MOVEMENT_SPEED: float = 100.0
+const MOVEMENT_SPEED: float = 70.0
 const RUN_SPEED_MULTIPLIER: float = 1.6
 const HITBOX_OFFSET: float = 20.0
 
@@ -82,7 +82,7 @@ func apply_hitbox_transform() -> void:
 		&"ui_left": {"rotation": -PI / 2},
 		&"ui_right": {"rotation": PI / 2}
 	}
-	
+
 	var transform_data: Dictionary = transform_map.get(current_facing_direction, transform_map.get(&"ui_down"))
 	_sword_hitbox.rotation = transform_data.get("rotation")
 

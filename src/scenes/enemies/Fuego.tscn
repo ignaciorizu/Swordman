@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://djct8bdvwpk12"]
+
+[ext_resource type="Texture2D" uid="uid://bllccpqnvgcra" path="res://src/sprites/enemies/Fire Effect and Bullet 16x16.png" id="1_e1koy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_if6j7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ngi4"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(464, 176, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1hdo"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(480, 176, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k206k"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(496, 176, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw2ae"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(512, 176, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq83s"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(528, 176, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mownv"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(544, 176, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsjae"]
+atlas = ExtResource("1_e1koy")
+region = Rect2(560, 176, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_if6j7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ngi4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1hdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k206k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw2ae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq83s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mownv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsjae")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Fuego" type="Area2D" unique_id=683448154]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=863927954]
+shape = SubResource("CapsuleShape2D_if6j7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1484373926]
+sprite_frames = SubResource("SpriteFrames_if6j7")
+frame = 6
+frame_progress = 1.0
