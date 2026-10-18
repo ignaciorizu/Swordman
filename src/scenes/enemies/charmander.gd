@@ -1,14 +1,18 @@
 extends CharacterBody2D
 
-const MOVE_SPEED = 30.0
+const MOVE_SPEED: float = 30.0
 const ARRIVAL_TOLERANCE: float = 1
+const MAX_DISTANCE: float = 200
 
 var route_patrol: PackedVector2Array = []
 var actual_point: int = 0
 var direction: StringName = &""
+var state: StringName = &"Patrol"
+var player: Node2D = null
 
 @export var patrol_path: Path2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var vision_zone: Area2D = $vision_zone
 
 func _ready() -> void:
 	global_position = patrol_path.to_global(patrol_path.curve.get_point_position(0))
@@ -20,11 +24,17 @@ func get_route():
 		route_patrol[point] = patrol_path.to_global(route_patrol[point])
 
 func _physics_process(delta: float) -> void:
-	patrol_Move()
+	move_enemie()
 	move_and_slide()
 	animation_enemie()
 
-func patrol_Move():
+func move_enemie():
+	if state == &"Patrol":
+		patrol_move()
+	elif state == &"Attack":
+		attack_move()
+
+func patrol_move():
 	if route_patrol.is_empty():
 		velocity = Vector2.ZERO
 		return
@@ -36,6 +46,11 @@ func patrol_Move():
 
 	velocity = global_position.direction_to(point) * MOVE_SPEED
 
+func attack_move():
+	if route_patrol[actual_point].distance_squared_to(global_position) > MAX_DISTANCE:
+		state = &"Patrol"
+	velocity = global_position.direction_to(player.global_position) * MOVE_SPEED
+	
 func direction_enemie():
 	var angle_enemie: float = velocity.angle()
 	if angle_enemie > -PI/4 and angle_enemie < PI/4:
@@ -55,3 +70,13 @@ func animation_enemie() -> void:
 	var target_animation := StringName("Walk" + direction)
 	assert(animated_sprite_2d.sprite_frames.has_animation(target_animation), "Animacion inexistente: " + target_animation)
 	animated_sprite_2d.play(target_animation)
+
+func _on_vision_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and state == &"Patrol":
+		state = &"Attack"
+		player = body
+
+func _on_vision_zone_body_exited(body: Node2D) -> void:
+	if body.is_in_group("player") and state == &"Attack":
+		state = &"Patrol"
+		player = null
