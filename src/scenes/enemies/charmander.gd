@@ -89,3 +89,11 @@ func _on_vision_zone_body_exited(body: Node2D) -> void:
 func _on_damage_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		body.take_damage(attack_damage, global_position)
+		deactivate_damage_zone()
+		get_tree().create_timer(body.INVULNERABILITY_DURATION + 0.1).timeout.connect(activate_damage_zone)
+
+func deactivate_damage_zone():
+	damage_zone.set_deferred("monitoring", false)
+
+func activate_damage_zone():
+	damage_zone.set_deferred("monitoring", true)

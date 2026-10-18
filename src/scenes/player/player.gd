@@ -20,6 +20,7 @@ var is_attacking: bool = false
 var is_knocked_back: bool = false
 var is_invulnerable: bool = false
 var camera_shake_time: float = 0.0
+var is_dead: bool = false
 
 var vida: int = 100
 
@@ -53,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 	dispatch_animation()
 
 func update_velocity() -> void:
-	if is_knocked_back:
+	if is_knocked_back or is_dead:
 		return
 
 	if active_movement_input.is_empty() or is_attacking:
@@ -128,7 +129,7 @@ func resolve_attack_state() -> void:
 	sword_hitbox.set_deferred(&"monitoring", false)
 
 func dispatch_animation() -> void:
-	if is_attacking or is_invulnerable or vida < 0:
+	if is_attacking or is_invulnerable or is_dead:
 		return
 		
 	if active_movement_input.is_empty():
@@ -225,7 +226,12 @@ func process_camera_shake(delta: float) -> void:
 	camera_2d.offset = Vector2(randf_range(-SHAKE_INTENSITY, SHAKE_INTENSITY), randf_range(-SHAKE_INTENSITY, SHAKE_INTENSITY))
 
 func player_dies():
+	if is_dead:
+		return
+
 	play_dies_animation()
+	is_dead = true
+	velocity = Vector2.ZERO
 
 func play_dies_animation():
 	var dies_animation_map := {
