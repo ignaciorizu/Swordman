@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const MOVE_SPEED: float = 30.0
 const ARRIVAL_TOLERANCE: float = 1
-const MAX_DISTANCE: float = 200
+const MAX_DISTANCE: float = 1500
 
 var route_patrol: PackedVector2Array = []
 var actual_point: int = 0
@@ -47,7 +47,9 @@ func patrol_move():
 	velocity = global_position.direction_to(point) * MOVE_SPEED
 
 func attack_move():
-	if route_patrol[actual_point].distance_squared_to(global_position) > MAX_DISTANCE:
+	if ((global_position.distance_squared_to(route_patrol[actual_point]) > MAX_DISTANCE) 
+		and (global_position.distance_squared_to(route_patrol[actual_point + 1]) > MAX_DISTANCE)
+		and (global_position.distance_squared_to(route_patrol[actual_point - 1]) > MAX_DISTANCE)):
 		state = &"Patrol"
 	velocity = global_position.direction_to(player.global_position) * MOVE_SPEED
 	
