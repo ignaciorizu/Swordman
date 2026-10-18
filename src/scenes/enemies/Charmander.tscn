@@ -221,6 +221,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdx7w"]
 size = Vector2(64, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6rjk"]
+size = Vector2(21, 21)
+
 [node name="Charmander" type="CharacterBody2D" unique_id=89745142]
 script = ExtResource("1_osh5c")
 
@@ -243,5 +246,11 @@ scale = Vector2(0.62499994, 0.62499994)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="vision_zone" unique_id=1621162513]
 shape = SubResource("RectangleShape2D_pdx7w")
 
+[node name="damage_zone" type="Area2D" parent="." unique_id=764519563]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone" unique_id=185534386]
+shape = SubResource("RectangleShape2D_r6rjk")
+
 [connection signal="body_entered" from="vision_zone" to="." method="_on_vision_zone_body_entered"]
 [connection signal="body_exited" from="vision_zone" to="." method="_on_vision_zone_body_exited"]
+[connection signal="body_entered" from="damage_zone" to="." method="_on_damage_zone_body_entered"]

@@ -1,20 +1,31 @@
 extends CharacterBody2D
 
-@onready var _animation_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var _sword_hitbox: Area2D = $sword_hitbox
+@onready var animation_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sword_hitbox: Area2D = $sword_hitbox
+@onready var camera_2d: Camera2D = $Camera2D
 
 const MOVEMENT_SPEED: float = 70.0
 const RUN_SPEED_MULTIPLIER: float = 1.6
 const HITBOX_OFFSET: float = 20.0
+const KNOCKBACK_FORCE: float = 120.0
+const KNOCKBACK_DURATION: float = 0.2
+const INVULNERABILITY_DURATION: float = 1.0
+const SHAKE_INTENSITY: float = 4.0
+const SHAKE_DURATION: float = 0.3
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
 var run_ability_unlock: bool = false
 var is_attacking: bool = false
+var is_knocked_back: bool = false
+var is_invulnerable: bool = false
+var camera_shake_time: float = 0.0
+
+var vida: int = 100
 
 func _ready() -> void:
-	_animation_sprite.animation_finished.connect(resolve_attack_state)
-	_sword_hitbox.monitoring = false
+	animation_sprite.animation_finished.connect(resolve_attack_state)
+	sword_hitbox.monitoring = false
 
 func _input(event: InputEvent) -> void:
 	process_attack_input(event, &"ui_attack")
@@ -42,10 +53,13 @@ func _physics_process(_delta: float) -> void:
 	dispatch_animation()
 
 func update_velocity() -> void:
-	if active_movement_input.is_empty():
+	if is_knocked_back:
+		return
+
+	if active_movement_input.is_empty() or is_attacking:
 		velocity = Vector2.ZERO
 		return
-	
+
 	var direction_vector: Vector2 = calculate_direction_vector(active_movement_input)
 	var velocity_player: float = calculate_movement_speed()
 	velocity = direction_vector * velocity_player
@@ -70,7 +84,7 @@ func calculate_movement_speed() -> float:
 func execute_attack() -> void:
 	is_attacking = true
 	apply_hitbox_transform()
-	_sword_hitbox.set_deferred(&"monitoring", true)
+	sword_hitbox.set_deferred(&"monitoring", true)
 
 	var current_state: StringName = determine_movement_state()
 	play_contextual_attack_animation(current_state)
@@ -84,7 +98,7 @@ func apply_hitbox_transform() -> void:
 	}
 
 	var transform_data: Dictionary = transform_map.get(current_facing_direction, transform_map.get(&"ui_down"))
-	_sword_hitbox.rotation = transform_data.get("rotation")
+	sword_hitbox.rotation = transform_data.get("rotation")
 
 func determine_movement_state() -> StringName:
 	if active_movement_input.is_empty():
@@ -104,17 +118,17 @@ func play_contextual_attack_animation(state: StringName) -> void:
 	var direction_suffix: StringName = direction_suffix_map.get(current_facing_direction, &"Down")
 	var target_animation := StringName("Attack" + state + direction_suffix)
 	
-	_animation_sprite.play(target_animation)
+	animation_sprite.play(target_animation)
 
 func resolve_attack_state() -> void:
 	if not is_attacking:
 		return
 		
 	is_attacking = false
-	_sword_hitbox.set_deferred(&"monitoring", false)
+	sword_hitbox.set_deferred(&"monitoring", false)
 
 func dispatch_animation() -> void:
-	if is_attacking:
+	if is_attacking or is_invulnerable or vida < 0:
 		return
 		
 	if active_movement_input.is_empty():
@@ -133,7 +147,7 @@ func play_idle_animation() -> void:
 	}
 	
 	var target_animation: StringName = idle_animation_map.get(current_facing_direction, &"IdleDown")
-	_animation_sprite.play(target_animation)
+	animation_sprite.play(target_animation)
 	
 func play_walk_animation() -> void:
 	var walk_animation_map := {
@@ -144,7 +158,7 @@ func play_walk_animation() -> void:
 	}
 	
 	var target_animation: StringName = walk_animation_map.get(current_facing_direction, &"WalkDown")
-	_animation_sprite.play(target_animation)
+	animation_sprite.play(target_animation)
 	
 func play_run_animation() -> void:
 	var run_animation_map := {
@@ -155,4 +169,71 @@ func play_run_animation() -> void:
 	}
 	
 	var target_animation: StringName = run_animation_map.get(current_facing_direction, &"RunDown")
-	_animation_sprite.play(target_animation)
+	animation_sprite.play(target_animation)
+
+func take_damage(damage: int, attacker_position: Vector2):
+	if is_invulnerable:
+		return
+
+	vida -= damage
+	if vida - damage < 0:
+		player_dies()
+		return
+	
+	apply_knockback(attacker_position)
+	trigger_camera_shake(SHAKE_DURATION)
+	activate_invulnerability()
+	
+func apply_knockback(attacker_position: Vector2) -> void:
+	is_knocked_back = true
+	var knockback_direction: Vector2 = attacker_position.direction_to(global_position)
+	velocity = knockback_direction * KNOCKBACK_FORCE
+	
+	get_tree().create_timer(KNOCKBACK_DURATION).timeout.connect(resolve_knockback_state)
+
+func resolve_knockback_state() -> void:
+	is_knocked_back = false
+
+func activate_invulnerability() -> void:
+	is_invulnerable = true
+	play_hurt_animation()
+	get_tree().create_timer(INVULNERABILITY_DURATION).timeout.connect(resolve_invulnerability_state)
+
+func resolve_invulnerability_state() -> void:
+	is_invulnerable = false
+
+func play_hurt_animation():
+	var hurt_animation_map := {
+		&"ui_up": &"HurtUp",
+		&"ui_down": &"HurtDown",
+		&"ui_left": &"HurtLeft",
+		&"ui_right": &"HurtRight"
+	}
+
+	var target_animation: StringName = hurt_animation_map.get(current_facing_direction, &"HurtDown")
+	animation_sprite.play(target_animation)
+
+func trigger_camera_shake(duration: float) -> void:
+	camera_shake_time = duration
+
+func process_camera_shake(delta: float) -> void:
+	if camera_shake_time <= 0.0:
+		camera_2d.offset = Vector2.ZERO
+		return
+		
+	camera_shake_time -= delta
+	camera_2d.offset = Vector2(randf_range(-SHAKE_INTENSITY, SHAKE_INTENSITY), randf_range(-SHAKE_INTENSITY, SHAKE_INTENSITY))
+
+func player_dies():
+	play_dies_animation()
+
+func play_dies_animation():
+	var dies_animation_map := {
+		&"ui_up": &"DiesUp",
+		&"ui_down": &"DiesDown",
+		&"ui_left": &"DiesLeft",
+		&"ui_right": &"DiesRight"
+	}
+
+	var target_animation: StringName = dies_animation_map.get(current_facing_direction, &"DiesDown")
+	animation_sprite.play(target_animation)

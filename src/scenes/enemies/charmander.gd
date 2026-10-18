@@ -10,9 +10,12 @@ var direction: StringName = &""
 var state: StringName = &"Patrol"
 var player: Node2D = null
 
+@export var attack_damage: int = 10
 @export var patrol_path: Path2D
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_zone: Area2D = $vision_zone
+@onready var damage_zone: Area2D = $damage_zone
 
 func _ready() -> void:
 	global_position = patrol_path.to_global(patrol_path.curve.get_point_position(0))
@@ -82,3 +85,7 @@ func _on_vision_zone_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player") and state == &"Attack":
 		state = &"Patrol"
 		player = null
+
+func _on_damage_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		body.take_damage(attack_damage, global_position)
