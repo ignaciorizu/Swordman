@@ -54,10 +54,10 @@ func _physics_process(_delta: float) -> void:
 	dispatch_animation()
 
 func update_velocity() -> void:
-	if is_knocked_back or is_dead:
+	if is_knocked_back:
 		return
 
-	if active_movement_input.is_empty() or is_attacking:
+	if active_movement_input.is_empty() or is_attacking or is_dead:
 		velocity = Vector2.ZERO
 		return
 
@@ -173,11 +173,11 @@ func play_run_animation() -> void:
 	animation_sprite.play(target_animation)
 
 func take_damage(damage: int, attacker_position: Vector2):
-	if is_invulnerable:
+	if is_invulnerable or is_dead:
 		return
 
 	vida -= damage
-	if vida - damage < 0:
+	if vida - damage <= 0:
 		player_dies()
 		return
 	

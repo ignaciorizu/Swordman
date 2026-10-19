@@ -198,7 +198,6 @@ position = Vector2(108, 33)
 position = Vector2(240, 73)
 collision_layer = 4
 collision_mask = 7
-attack_damage = 50
 patrol_path = NodePath("../Path2D")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=2116533404]

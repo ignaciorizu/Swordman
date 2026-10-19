@@ -9,6 +9,7 @@ var actual_point: int = 0
 var direction: StringName = &""
 var state: StringName = &"Patrol"
 var player: Node2D = null
+var is_attacking: bool = false
 
 @export var attack_damage: int = 10
 @export var patrol_path: Path2D
@@ -29,7 +30,7 @@ func get_route():
 func _physics_process(delta: float) -> void:
 	move_enemie()
 	move_and_slide()
-	animation_enemie()
+	enemie_animation()
 
 func move_enemie():
 	if state == &"Patrol":
@@ -67,13 +68,15 @@ func direction_enemie():
 	elif angle_enemie > (-3*PI)/4 and angle_enemie < PI/4:
 		direction = &"Up"
 
-func animation_enemie() -> void:
-	if velocity == Vector2.ZERO:
+func enemie_animation() -> void:
+	if velocity == Vector2.ZERO or is_attacking:
 		return
-	
+
 	direction_enemie()
+	play_walk_animation()
+
+func play_walk_animation():
 	var target_animation := StringName("Walk" + direction)
-	assert(animated_sprite_2d.sprite_frames.has_animation(target_animation), "Animacion inexistente: " + target_animation)
 	animated_sprite_2d.play(target_animation)
 
 func _on_vision_zone_body_entered(body: Node2D) -> void:
@@ -88,9 +91,15 @@ func _on_vision_zone_body_exited(body: Node2D) -> void:
 
 func _on_damage_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		is_attacking = true
 		body.take_damage(attack_damage, global_position)
 		deactivate_damage_zone()
 		get_tree().create_timer(body.INVULNERABILITY_DURATION + 0.1).timeout.connect(activate_damage_zone)
+		play_attack_animation()
+
+func play_attack_animation():
+	var target_animation := StringName("Attack" + direction)
+	animated_sprite_2d.play(target_animation)
 
 func deactivate_damage_zone():
 	damage_zone.set_deferred("monitoring", false)
