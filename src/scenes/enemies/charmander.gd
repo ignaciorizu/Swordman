@@ -3,6 +3,7 @@ extends CharacterBody2D
 const MOVE_SPEED: float = 30.0
 const ARRIVAL_TOLERANCE: float = 1
 const MAX_DISTANCE: float = 1500
+const ATTACK_COOLDOWN: float = 1.2
 
 var route_patrol: PackedVector2Array = []
 var actual_point: int = 0
@@ -19,6 +20,7 @@ var is_attacking: bool = false
 @onready var damage_zone: Area2D = $damage_zone
 
 func _ready() -> void:
+	animated_sprite_2d.animation_finished.connect(resolve_attack_state)
 	global_position = patrol_path.to_global(patrol_path.curve.get_point_position(0))
 	get_route()
 
@@ -27,12 +29,16 @@ func get_route():
 	for point in range(route_patrol.size()):
 		route_patrol[point] = patrol_path.to_global(route_patrol[point])
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_enemie()
 	move_and_slide()
 	enemie_animation()
 
 func move_enemie():
+	if is_attacking:
+		velocity = Vector2.ZERO
+		return
+
 	if state == &"Patrol":
 		patrol_move()
 	elif state == &"Attack":
@@ -94,12 +100,18 @@ func _on_damage_zone_body_entered(body: Node2D) -> void:
 		is_attacking = true
 		body.take_damage(attack_damage, global_position)
 		deactivate_damage_zone()
-		get_tree().create_timer(body.INVULNERABILITY_DURATION + 0.1).timeout.connect(activate_damage_zone)
+		get_tree().create_timer(ATTACK_COOLDOWN).timeout.connect(activate_damage_zone)
 		play_attack_animation()
 
 func play_attack_animation():
 	var target_animation := StringName("Attack" + direction)
 	animated_sprite_2d.play(target_animation)
+
+func resolve_attack_state() -> void:
+	if not is_attacking:
+		return
+		
+	is_attacking = false
 
 func deactivate_damage_zone():
 	damage_zone.set_deferred("monitoring", false)
