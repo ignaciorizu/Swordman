@@ -1,19 +1,24 @@
 extends CharacterBody2D
 
+const KNOCKBACK_FORCE: float = 150.0
+const KNOCKBACK_DURATION: float = 0.2
 const MOVE_SPEED: float = 30.0
 const ARRIVAL_TOLERANCE: float = 1
 const MAX_DISTANCE: float = 1500
 const ATTACK_COOLDOWN: float = 1.2
 
+@export var max_health: int = 70
+@export var attack_damage: int = 10
+@export var patrol_path: Path2D
+
+var is_knocked_back: bool = false
 var route_patrol: PackedVector2Array = []
 var actual_point: int = 0
 var direction: StringName = &""
 var state: StringName = &"Patrol"
 var player: Node2D = null
 var is_attacking: bool = false
-
-@export var attack_damage: int = 10
-@export var patrol_path: Path2D
+var life = 70
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_zone: Area2D = $vision_zone
@@ -25,6 +30,7 @@ func _ready() -> void:
 	get_route()
 
 func get_route():
+	life = max_health
 	route_patrol = patrol_path.curve.get_baked_points()
 	for point in range(route_patrol.size()):
 		route_patrol[point] = patrol_path.to_global(route_patrol[point])
@@ -35,6 +41,9 @@ func _physics_process(_delta: float) -> void:
 	enemie_animation()
 
 func move_enemie():
+	if is_knocked_back:
+		return
+
 	if is_attacking:
 		velocity = Vector2.ZERO
 		return
@@ -118,3 +127,18 @@ func deactivate_damage_zone():
 
 func activate_damage_zone():
 	damage_zone.set_deferred("monitoring", true)
+	
+func take_damage(damage_amount: int, attacker_position: Vector2) -> void:
+	life -= damage_amount
+	print(life)
+	apply_knockback(attacker_position)
+
+func apply_knockback(attacker_position: Vector2) -> void:
+	is_knocked_back = true
+	var knockback_direction: Vector2 = attacker_position.direction_to(global_position)
+	velocity = knockback_direction * KNOCKBACK_FORCE
+	
+	get_tree().create_timer(KNOCKBACK_DURATION).timeout.connect(resolve_knockback_state)
+
+func resolve_knockback_state() -> void:
+	is_knocked_back = false

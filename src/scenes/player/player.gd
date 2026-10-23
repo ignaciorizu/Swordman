@@ -12,6 +12,7 @@ const KNOCKBACK_DURATION: float = 0.2
 const INVULNERABILITY_DURATION: float = 1.0
 const SHAKE_INTENSITY: float = 4.0
 const SHAKE_DURATION: float = 0.3
+const SWORD_DAMAGE: int = 15
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
@@ -22,7 +23,7 @@ var is_invulnerable: bool = false
 var camera_shake_time: float = 0.0
 var is_dead: bool = false
 
-var vida: int = 100
+var life: int = 100
 
 func _ready() -> void:
 	animation_sprite.animation_finished.connect(resolve_attack_state)
@@ -176,8 +177,8 @@ func take_damage(damage: int, attacker_position: Vector2):
 	if is_invulnerable or is_dead:
 		return
 
-	vida -= damage
-	if vida - damage <= 0:
+	life -= damage
+	if life - damage <= 0:
 		player_dies()
 		return
 	
@@ -243,3 +244,10 @@ func play_dies_animation():
 
 	var target_animation: StringName = dies_animation_map.get(current_facing_direction, &"DiesDown")
 	animation_sprite.play(target_animation)
+
+
+func _on_sword_hitbox_body_entered(body: Node2D) -> void:
+	if not body.has_method("take_damage"):
+		return
+		
+	body.take_damage(SWORD_DAMAGE, global_position)
