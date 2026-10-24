@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b16rx3qn5ttiq" path="res://src/scenes/player/player.tscn" id="2_16xk7"]
 [ext_resource type="PackedScene" uid="uid://c7t5i77bdwo5f" path="res://src/scenes/enemies/Charmander.tscn" id="2_673n6"]
 [ext_resource type="PackedScene" uid="uid://d1cdrwtx2mppu" path="res://src/scenes/objects/PlumaVelocidad.tscn" id="3_673n6"]
+[ext_resource type="PackedScene" uid="uid://djct8bdvwpk12" path="res://src/scenes/enemies/FireBall.tscn" id="5_673n6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5d2eq"]
 texture = ExtResource("1_in1fd")
@@ -198,6 +199,8 @@ position = Vector2(108, 33)
 position = Vector2(240, 73)
 collision_layer = 4
 collision_mask = 7
+combat_mode = 1
+fire_ball = ExtResource("5_673n6")
 patrol_path = NodePath("../Path2D")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=2116533404]

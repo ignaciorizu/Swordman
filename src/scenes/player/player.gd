@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 	process_directional_input(event, &"ui_right")
 
 func process_attack_input(event: InputEvent, action: StringName) -> void:
-	if not event.is_action_pressed(action) or is_attacking:
+	if not event.is_action_pressed(action) or is_attacking or is_dead:
 		return
 
 	execute_attack()

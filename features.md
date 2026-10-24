@@ -23,6 +23,7 @@ Mundo
 4. portal a otros niveles
 5. checkpoint
 6. mochila para los objetos
+7. los objetos de más de una capa se vuelvan opacos si estan con el persoje debajo
 
 Enemigos
 1. moviemiento base de patrulla 🟢
@@ -33,12 +34,13 @@ Enemigos
 6. ataque a Jugador animacion 🟢
 7. vida de enemigo 🟢
 8. daño de enemigo 🟢
-9. daño de enemigo animacion 🟡
+9. daño de enemigo animacion 🟢
 10. muerte enemigo 🟢
-11. ataque a distancia a Jugador
-12. ataque a distancia a Jugador animacion
-13. diferente enemigo 1
-14. diferente enemigo 2
+11. muerte enemigo animacion 🟢
+12. ataque a distancia a Jugador
+13. ataque a distancia a Jugador animacion
+14. diferente enemigo 1
+15. diferente enemigo 2
 15. enemigo final
 	EXTRAS
 	16. patrones de ataque diferentes para enemigo final

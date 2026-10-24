@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c7t5i77bdwo5f"]
 
 [ext_resource type="Texture2D" uid="uid://5mxalxpygycu" path="res://src/sprites/enemies/Charmander.png" id="1_02bkg"]
-[ext_resource type="PackedScene" uid="uid://djct8bdvwpk12" path="res://src/scenes/enemies/Fuego.tscn" id="1_lvqi8"]
 [ext_resource type="Script" uid="uid://dgabvk7x18smr" path="res://src/scenes/enemies/charmander.gd" id="1_osh5c"]
 [ext_resource type="Texture2D" uid="uid://diclkhcf2ebro" path="res://src/sprites/enemies/Smoke VFX B2.png" id="4_8oty7"]
 
@@ -213,7 +212,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_nq7v4")
 }],
 "loop": 0,
-"name": &"DiedLeft",
+"name": &"DiesLeft",
 "speed": 4.0
 }, {
 "frames": [{
@@ -227,7 +226,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ctr10")
 }],
 "loop": 0,
-"name": &"DiedRigth",
+"name": &"DiesRight",
 "speed": 4.0
 }, {
 "frames": [{
@@ -251,7 +250,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_iaa34")
 }],
 "loop": 0,
-"name": &"HurtRigth",
+"name": &"HurtRight",
 "speed": 5.0
 }, {
 "frames": [{
@@ -365,11 +364,7 @@ position = Vector2(-8.106232e-06, -3.8146977e-06)
 rotation = -0.008403126
 scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_pdx7w")
-animation = &"HurtUp"
-
-[node name="Fuego" parent="." unique_id=683448154 instance=ExtResource("1_lvqi8")]
-position = Vector2(-7.450581e-09, -14)
-scale = Vector2(0.62499994, 0.62499994)
+animation = &"HurtRight"
 
 [node name="vision_zone" type="Area2D" parent="." unique_id=1865771664]
 
@@ -381,7 +376,7 @@ shape = SubResource("RectangleShape2D_pdx7w")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone" unique_id=185534386]
 shape = SubResource("RectangleShape2D_r6rjk")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=210484622]
+[node name="evil_particles" type="GPUParticles2D" parent="." unique_id=210484622]
 texture_filter = 2
 material = SubResource("CanvasItemMaterial_osh5c")
 amount = 18

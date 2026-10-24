@@ -1,43 +1,37 @@
 [gd_scene format=3 uid="uid://djct8bdvwpk12"]
 
-[ext_resource type="Texture2D" uid="uid://bllccpqnvgcra" path="res://src/sprites/enemies/Fire Effect and Bullet 16x16.png" id="1_e1koy"]
+[ext_resource type="Script" uid="uid://5fsj1qdsq53v" path="res://src/scenes/enemies/fire_ball.gd" id="1_fdnn0"]
+[ext_resource type="Texture2D" uid="uid://coxce8pi4usos" path="res://src/sprites/enemies/Purple Effect and Bullet 16x16.png" id="2_fdnn0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_if6j7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ngi4"]
-atlas = ExtResource("1_e1koy")
-region = Rect2(464, 176, 16, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1hdo"]
-atlas = ExtResource("1_e1koy")
+atlas = ExtResource("2_fdnn0")
 region = Rect2(480, 176, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k206k"]
-atlas = ExtResource("1_e1koy")
+atlas = ExtResource("2_fdnn0")
 region = Rect2(496, 176, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gw2ae"]
-atlas = ExtResource("1_e1koy")
+atlas = ExtResource("2_fdnn0")
 region = Rect2(512, 176, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iq83s"]
-atlas = ExtResource("1_e1koy")
+atlas = ExtResource("2_fdnn0")
 region = Rect2(528, 176, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mownv"]
-atlas = ExtResource("1_e1koy")
+atlas = ExtResource("2_fdnn0")
 region = Rect2(544, 176, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tsjae"]
-atlas = ExtResource("1_e1koy")
+atlas = ExtResource("2_fdnn0")
 region = Rect2(560, 176, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_if6j7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ngi4")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v1hdo")
 }, {
@@ -57,16 +51,22 @@ animations = [{
 "texture": SubResource("AtlasTexture_tsjae")
 }],
 "loop": 0,
-"name": &"default",
-"speed": 5.0
+"name": &"idle",
+"speed": 15.0
 }]
 
-[node name="Fuego" type="Area2D" unique_id=683448154]
+[node name="FireBall" type="Area2D" unique_id=683448154]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_fdnn0")
+speed = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=863927954]
 shape = SubResource("CapsuleShape2D_if6j7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1484373926]
 sprite_frames = SubResource("SpriteFrames_if6j7")
-frame = 6
+animation = &"idle"
+frame = 5
 frame_progress = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
