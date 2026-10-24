@@ -31,10 +31,10 @@ Enemigos
 4. movimiento de persecucion hasta una distancia x de la patrulla 🟢
 5. ataque a Jugador 🟢
 6. ataque a Jugador animacion 🟢
-7. vida de enemigo 🟡
-8. daño de enemigo
-9. daño de enemigo animacion
-10. muerte enemigo
+7. vida de enemigo 🟢
+8. daño de enemigo 🟢
+9. daño de enemigo animacion 🟡
+10. muerte enemigo 🟢
 11. ataque a distancia a Jugador
 12. ataque a distancia a Jugador animacion
 13. diferente enemigo 1

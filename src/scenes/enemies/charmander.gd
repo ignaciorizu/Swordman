@@ -6,6 +6,8 @@ const MOVE_SPEED: float = 30.0
 const ARRIVAL_TOLERANCE: float = 1
 const MAX_DISTANCE: float = 1500
 const ATTACK_COOLDOWN: float = 1.2
+const DAMAGE_COLOR: Color = Color(0.8, 0.1, 0.2, 1.0) 
+const NORMAL_COLOR: Color = Color.WHITE
 
 @export var max_health: int = 70
 @export var attack_damage: int = 10
@@ -84,7 +86,7 @@ func direction_enemie():
 		direction = &"Up"
 
 func enemie_animation() -> void:
-	if velocity == Vector2.ZERO or is_attacking:
+	if velocity == Vector2.ZERO or is_attacking or is_knocked_back:
 		return
 
 	direction_enemie()
@@ -130,11 +132,17 @@ func activate_damage_zone():
 	
 func take_damage(damage_amount: int, attacker_position: Vector2) -> void:
 	life -= damage_amount
-	print(life)
+	if life <= 0:
+		die()
+		return
+
 	apply_knockback(attacker_position)
 
 func apply_knockback(attacker_position: Vector2) -> void:
 	is_knocked_back = true
+	animated_sprite_2d.modulate = DAMAGE_COLOR
+	play_hurt_animation()
+
 	var knockback_direction: Vector2 = attacker_position.direction_to(global_position)
 	velocity = knockback_direction * KNOCKBACK_FORCE
 	
@@ -142,3 +150,16 @@ func apply_knockback(attacker_position: Vector2) -> void:
 
 func resolve_knockback_state() -> void:
 	is_knocked_back = false
+	animated_sprite_2d.modulate = NORMAL_COLOR
+
+func play_hurt_animation() -> void:
+	var target_animation := StringName("Hurt" + direction)
+	assert(animated_sprite_2d.sprite_frames.has_animation(target_animation), "Animacion inexistente")
+	animated_sprite_2d.play(target_animation)
+
+func die() -> void:
+	set_physics_process(false)
+	damage_zone.set_deferred(&"monitoring", false)
+	vision_zone.set_deferred(&"monitoring", false)
+	
+	queue_free()
