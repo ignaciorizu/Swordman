@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bdh84vju4idfh" path="res://src/scenes/levels/objetos.gd" id="5_4o3g1"]
 [ext_resource type="PackedScene" uid="uid://djct8bdvwpk12" path="res://src/scenes/enemies/FireBall.tscn" id="5_673n6"]
 [ext_resource type="PackedScene" uid="uid://dcbml37812xgg" path="res://src/scenes/core/Transition_Zone.tscn" id="7_d4voc"]
+[ext_resource type="PackedScene" uid="uid://dajdjbekv5gjh" path="res://src/scenes/core/Pause_Menu.tscn" id="8_72rjg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4o3g1"]
 texture = ExtResource("1_in1fd")
@@ -4828,3 +4829,7 @@ script = ExtResource("5_4o3g1")
 position = Vector2(-769, -429)
 collision_layer = 16
 target_scene_path = "uid://cme2853y0xody"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1009698358]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=376256505 instance=ExtResource("8_72rjg")]

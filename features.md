@@ -20,7 +20,7 @@ Mundo
 1. tilemap del mundo 🟢
 2. limitar los movimientos del Jugador 🟢
 3. objetos en diferente capa 🟢
-4. portal a otros niveles
+4. portal a otros niveles 🟢
 5. checkpoint
 6. mochila para los objetos
 7. los objetos de más de una capa se vuelvan opacos si estan con el personaje debajo
