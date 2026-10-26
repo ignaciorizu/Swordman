@@ -6,7 +6,7 @@ const KNOCKBACK_FORCE: float = 150.0
 const KNOCKBACK_DURATION: float = 0.2
 const MOVE_SPEED: float = 30.0
 const ARRIVAL_TOLERANCE: float = 1
-const MAX_DISTANCE: float = 1500
+const MAX_DISTANCE: float = 2000
 const ATTACK_COOLDOWN: float = 2
 const DAMAGE_COLOR: Color = Color(0.8, 0.1, 0.2, 1.0) 
 const NORMAL_COLOR: Color = Color.WHITE
@@ -14,9 +14,13 @@ const CORPSE_FADE_DURATION: float = 2.0
 
 @export var combat_mode: CombatMode = CombatMode.MELEE
 @export var fire_ball : PackedScene
+@export var fire_ball_speed: float = 100.0
+@export var fire_ball_damage: float = 10.0
 @export var max_health: int = 70
 @export var attack_damage: int = 10
 @export var patrol_path: Path2D
+@export var vision_square: float = 50.0
+
 
 var is_knocked_back: bool = false
 var route_patrol: PackedVector2Array = []
@@ -30,16 +34,26 @@ var life = 70
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_zone: Area2D = $vision_zone
+@onready var collision_shape_2d: CollisionShape2D = $vision_zone/CollisionShape2D
 @onready var damage_zone: Area2D = $damage_zone
 @onready var evil_particles: GPUParticles2D = $evil_particles
 
 func _ready() -> void:
+	configure_vision_radius()
+	life = max_health
 	animated_sprite_2d.animation_finished.connect(resolve_attack_state)
 	global_position = patrol_path.to_global(patrol_path.curve.get_point_position(0))
 	get_route()
 
+func configure_vision_radius() -> void:
+	if not is_instance_valid(collision_shape_2d):
+		return
+		
+	var custom_shape: RectangleShape2D = RectangleShape2D.new()
+	custom_shape.size = Vector2(vision_square, vision_square)
+	collision_shape_2d.shape = custom_shape
+
 func get_route():
-	life = max_health
 	route_patrol = patrol_path.curve.get_baked_points()
 	for point in range(route_patrol.size()):
 		route_patrol[point] = patrol_path.to_global(route_patrol[point])
@@ -114,9 +128,13 @@ func reset_shoot_cooldown() -> void:
 	
 func instantiate_fireball():
 	var new_fire_ball: Node2D = fire_ball.instantiate()
-	new_fire_ball.move_direction = global_position.direction_to(player.global_position)
 	new_fire_ball.global_position = global_position
-	get_parent().add_child(new_fire_ball)
+	new_fire_ball.move_direction = global_position.direction_to(player.global_position)
+	new_fire_ball.speed = fire_ball_speed
+	new_fire_ball.damage = fire_ball_damage
+
+	var level_root: Node = get_tree().current_scene
+	level_root.add_child(new_fire_ball)
 
 func direction_enemie(reference_vector: Vector2):
 	if reference_vector == Vector2.ZERO:

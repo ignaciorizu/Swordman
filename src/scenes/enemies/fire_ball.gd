@@ -1,12 +1,11 @@
 extends Area2D
 
-const MAX_TRAVEL_DISTANCE: float = 100.0
+const MAX_TRAVEL_DISTANCE: float = 150.0
 const FADE_DURATION: float = 0.2
 const OFFSET_ROTATION: float = -PI / 2.0
 
-@export var speed : float = 100.0
-@export var damage :int = 10
-
+var speed : float = 100.0
+var damage :int = 10
 var move_direction: Vector2 = Vector2.ZERO
 var distance_traveled: float = 0.0
 var is_fading: bool = false
@@ -15,8 +14,14 @@ var is_fading: bool = false
 
 
 func _ready() -> void:
-	rotation = move_direction.angle() + OFFSET_ROTATION
+	apply_rotation()
 	animated_sprite_2d.play("idle")
+
+func apply_rotation() -> void:
+	if move_direction == Vector2.ZERO:
+		return
+
+	rotation = move_direction.angle() + OFFSET_ROTATION
 
 func _physics_process(delta: float) -> void:
 	if is_fading:

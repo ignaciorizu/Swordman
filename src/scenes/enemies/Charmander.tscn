@@ -354,6 +354,8 @@ scale_curve = SubResource("CurveTexture_ft2w8")
 color = Color(0.48613995, 0.12613517, 0.80164576, 1)
 
 [node name="Charmander" type="CharacterBody2D" unique_id=89745142]
+collision_layer = 4
+collision_mask = 15
 script = ExtResource("1_osh5c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=950940162]
@@ -364,7 +366,7 @@ position = Vector2(-8.106232e-06, -3.8146977e-06)
 rotation = -0.008403126
 scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_pdx7w")
-animation = &"HurtRight"
+animation = &"WalkRight"
 
 [node name="vision_zone" type="Area2D" parent="." unique_id=1865771664]
 

@@ -23,10 +23,13 @@ Mundo
 4. portal a otros niveles
 5. checkpoint
 6. mochila para los objetos
-7. los objetos de más de una capa se vuelvan opacos si estan con el persoje debajo
+7. los objetos de más de una capa se vuelvan opacos si estan con el personaje debajo
+8. HUD
+9. menu de pausa
+10. pantalla de GameOver
 
 Enemigos
-1. moviemiento base de patrulla 🟢
+1. movimiento base de patrulla 🟢
 2. movimiento animiacion 🟢
 3. movimiento de persecucion 🟢
 4. movimiento de persecucion hasta una distancia x de la patrulla 🟢
@@ -37,8 +40,8 @@ Enemigos
 9. daño de enemigo animacion 🟢
 10. muerte enemigo 🟢
 11. muerte enemigo animacion 🟢
-12. ataque a distancia a Jugador
-13. ataque a distancia a Jugador animacion
+12. ataque a distancia a Jugador 🟢
+13. ataque a distancia a Jugador animacion 🟢
 14. diferente enemigo 1
 15. diferente enemigo 2
 15. enemigo final

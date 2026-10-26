@@ -13,6 +13,8 @@ const INVULNERABILITY_DURATION: float = 1.0
 const SHAKE_INTENSITY: float = 4.0
 const SHAKE_DURATION: float = 0.3
 const SWORD_DAMAGE: int = 15
+const DAMAGE_COLOR: Color = Color(0.8, 0.1, 0.2, 1.0) 
+const NORMAL_COLOR: Color = Color.WHITE
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
@@ -130,7 +132,7 @@ func resolve_attack_state() -> void:
 	sword_hitbox.set_deferred(&"monitoring", false)
 
 func dispatch_animation() -> void:
-	if is_attacking or is_invulnerable or is_dead:
+	if is_attacking or is_knocked_back or is_dead:
 		return
 		
 	if active_movement_input.is_empty():
@@ -188,6 +190,7 @@ func take_damage(damage: int, attacker_position: Vector2):
 	
 func apply_knockback(attacker_position: Vector2) -> void:
 	is_knocked_back = true
+	play_hurt_animation()
 	var knockback_direction: Vector2 = attacker_position.direction_to(global_position)
 	velocity = knockback_direction * KNOCKBACK_FORCE
 	
@@ -198,11 +201,12 @@ func resolve_knockback_state() -> void:
 
 func activate_invulnerability() -> void:
 	is_invulnerable = true
-	play_hurt_animation()
+	animation_sprite.modulate = DAMAGE_COLOR
 	get_tree().create_timer(INVULNERABILITY_DURATION).timeout.connect(resolve_invulnerability_state)
 
 func resolve_invulnerability_state() -> void:
 	is_invulnerable = false
+	animation_sprite.modulate = NORMAL_COLOR
 
 func play_hurt_animation():
 	var hurt_animation_map := {
@@ -245,9 +249,9 @@ func play_dies_animation():
 	var target_animation: StringName = dies_animation_map.get(current_facing_direction, &"DiesDown")
 	animation_sprite.play(target_animation)
 
-
 func _on_sword_hitbox_body_entered(body: Node2D) -> void:
-	if not body.has_method("take_damage"):
-		return
-		
-	body.take_damage(SWORD_DAMAGE, global_position)
+	if body.has_method("take_damage"):
+		body.take_damage(SWORD_DAMAGE, global_position)
+
+	if body.has_method("process_impact"):
+		body.process_impact(sword_hitbox.global_position)

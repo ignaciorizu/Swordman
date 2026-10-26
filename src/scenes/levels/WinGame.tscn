@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://g7puvaaap4e3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_if6j7"]
+font_size = 47
+font_color = Color(0, 0, 0, 1)
+outline_size = 5
+shadow_size = 6
+shadow_color = Color(0.6651194, 0.24073339, 0.41534385, 0)
+
+[node name="WinGame" type="Node2D" unique_id=1783297960]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2067735835]
+offset_right = 1160.0
+offset_bottom = 649.0
+
+[node name="Label" type="Label" parent="." unique_id=1199270544]
+offset_right = 1157.0
+offset_bottom = 648.0
+text = "Ganaste"
+label_settings = SubResource("LabelSettings_if6j7")
+horizontal_alignment = 1
+vertical_alignment = 1
