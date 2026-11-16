@@ -49,6 +49,7 @@ bus = &"Sfx"
 
 [node name="Danio_Enemigo" type="AudioStreamPlayer" parent="." unique_id=646035050]
 stream = ExtResource("10_brguo")
+volume_db = 6.154
 bus = &"Sfx"
 
 [node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1287780606]

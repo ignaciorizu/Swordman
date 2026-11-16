@@ -85,3 +85,10 @@ func reset_session() -> void:
 	current_score = INITIAL_SCORE
 	time_remaining = LEVEL_TIME_LIMIT
 	last_death_cause = DEATH_CAUSE_UNKNOWN
+
+func add_score(points: int) -> void:
+	if points <= 0:
+		return
+		
+	current_score += points
+	EventBus.score_changed.emit(current_score)

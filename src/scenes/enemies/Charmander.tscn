@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7t5i77bdwo5f"]
 
 [ext_resource type="Texture2D" uid="uid://5mxalxpygycu" path="res://src/sprites/enemies/Charmander.png" id="1_02bkg"]
-[ext_resource type="Script" uid="uid://dgabvk7x18smr" path="res://src/scenes/enemies/charmander.gd" id="1_osh5c"]
+[ext_resource type="Script" uid="uid://s7ocuoqiytgy" path="res://src/scenes/enemies/enemie.gd" id="1_osh5c"]
 [ext_resource type="Texture2D" uid="uid://diclkhcf2ebro" path="res://src/sprites/enemies/Smoke VFX B2.png" id="4_8oty7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_if6j7"]
@@ -386,6 +386,7 @@ texture = ExtResource("4_8oty7")
 explosiveness = 0.04
 process_material = SubResource("ParticleProcessMaterial_qd4g7")
 
+[connection signal="sprite_frames_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_sprite_frames_changed"]
 [connection signal="body_entered" from="vision_zone" to="." method="_on_vision_zone_body_entered"]
 [connection signal="body_exited" from="vision_zone" to="." method="_on_vision_zone_body_exited"]
 [connection signal="body_entered" from="damage_zone" to="." method="_on_damage_zone_body_entered"]
