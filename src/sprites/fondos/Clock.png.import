@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ko15x8vyty0i"
-path="res://.godot/imported/Heavy_Attack_Up.png-844638c825b4659b6569d4a0bde2a878.ctex"
+uid="uid://drj50402opsuu"
+path="res://.godot/imported/Clock.png-1c27b9eecbbc79426cd1ea4e08be2939.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/player/Heavy_Attack_Up.png"
-dest_files=["res://.godot/imported/Heavy_Attack_Up.png-844638c825b4659b6569d4a0bde2a878.ctex"]
+source_file="res://src/sprites/fondos/Clock.png"
+dest_files=["res://.godot/imported/Clock.png-1c27b9eecbbc79426cd1ea4e08be2939.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0e7x45duuai3"
-path="res://.godot/imported/Attack_Right.png-15bf5729f6ae9f509840cf07e0b3805d.ctex"
+uid="uid://de7xyfqqsmgb1"
+path="res://.godot/imported/progress bar most rounded over.png-0883112c2a2cbddfd9b5292b8035d67f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/player/Attack_Right.png"
-dest_files=["res://.godot/imported/Attack_Right.png-15bf5729f6ae9f509840cf07e0b3805d.ctex"]
+source_file="res://src/sprites/fondos/progress bar most rounded over.png"
+dest_files=["res://.godot/imported/progress bar most rounded over.png-0883112c2a2cbddfd9b5292b8035d67f.ctex"]
 
 [params]
 

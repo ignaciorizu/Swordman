@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7qcvgjdnptba"
-path="res://.godot/imported/Run_Heavy_Attack_Right.png-78e8665449ad64f825576977c2c56009.ctex"
+uid="uid://dp74gxbt0olhb"
+path="res://.godot/imported/progress bar most rounded progress red.png-96b157c349533a0e484e6048f6e3e028.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/sprites/player/Run_Heavy_Attack_Right.png"
-dest_files=["res://.godot/imported/Run_Heavy_Attack_Right.png-78e8665449ad64f825576977c2c56009.ctex"]
+source_file="res://src/sprites/fondos/progress bar most rounded progress red.png"
+dest_files=["res://.godot/imported/progress bar most rounded progress red.png-96b157c349533a0e484e6048f6e3e028.ctex"]
 
 [params]
 

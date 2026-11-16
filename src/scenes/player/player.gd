@@ -183,12 +183,15 @@ func play_run_animation() -> void:
 	var target_animation: StringName = run_animation_map.get(current_facing_direction, &"RunDown")
 	animation_sprite.play(target_animation)
 
-func take_damage(damage: int, attacker_position: Vector2):
+func take_damage(damage: int, attacker_position: Vector2) -> void:
 	if is_invulnerable or is_dead:
 		return
 
 	life -= damage
-	if life - damage <= 0:
+	EventBus.player_health_changed.emit(life, GameState.MAX_PLAYER_HEALTH)
+	
+	if life <= 0:
+		EventBus.player_died.emit()
 		player_dies()
 		return
 	
