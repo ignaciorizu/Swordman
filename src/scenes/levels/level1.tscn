@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cjik6xattag02"]
 
+[ext_resource type="Script" uid="uid://bur02fg1iwqou" path="res://src/scenes/levels/level_1.gd" id="1_6jqnd"]
 [ext_resource type="Texture2D" uid="uid://cxlo4o87h6j4a" path="res://src/tiles/Beach-and-caves-tileset.png" id="1_in1fd"]
 [ext_resource type="PackedScene" uid="uid://b16rx3qn5ttiq" path="res://src/scenes/player/player.tscn" id="2_16xk7"]
 [ext_resource type="PackedScene" uid="uid://c7t5i77bdwo5f" path="res://src/scenes/enemies/Charmander.tscn" id="2_673n6"]
@@ -8,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djct8bdvwpk12" path="res://src/scenes/enemies/FireBall.tscn" id="5_673n6"]
 [ext_resource type="PackedScene" uid="uid://dcbml37812xgg" path="res://src/scenes/ui/Transition_Zone.tscn" id="7_d4voc"]
 [ext_resource type="PackedScene" uid="uid://dajdjbekv5gjh" path="res://src/scenes/ui/Pause_Menu.tscn" id="8_72rjg"]
+[ext_resource type="PackedScene" uid="uid://igklowcnk3we" path="res://src/scenes/ui/Hud.tscn" id="9_8fasg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4o3g1"]
 texture = ExtResource("1_in1fd")
@@ -4722,6 +4724,7 @@ point_count = 6
 
 [node name="Level1" type="Node2D" unique_id=1124022018]
 y_sort_enabled = true
+script = ExtResource("1_6jqnd")
 
 [node name="MapaBase" type="Node2D" parent="." unique_id=1980577269]
 
@@ -4837,3 +4840,5 @@ target_scene_path = "uid://cme2853y0xody"
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1009698358]
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=376256505 instance=ExtResource("8_72rjg")]
+
+[node name="Hud" parent="CanvasLayer" unique_id=1830582752 instance=ExtResource("9_8fasg")]

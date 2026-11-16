@@ -18,6 +18,7 @@ const NORMAL_COLOR: Color = Color.WHITE
 const AUDIO_STEP: StringName = &"Pasos"
 const AUDIO_SWORD: StringName = &"Espada"
 const AUDIO_DAMAGE: StringName = &"Danio"
+const DEATH_CAUSE_DAMAGE: StringName = &"Corrupción Letal"
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
@@ -191,7 +192,7 @@ func take_damage(damage: int, attacker_position: Vector2) -> void:
 	EventBus.player_health_changed.emit(life, GameState.MAX_PLAYER_HEALTH)
 	
 	if life <= 0:
-		EventBus.player_died.emit()
+		EventBus.player_died.emit(DEATH_CAUSE_DAMAGE)
 		player_dies()
 		return
 	

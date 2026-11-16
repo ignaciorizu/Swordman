@@ -5,8 +5,7 @@ func pause() -> void:
 	visible = get_tree().paused
 
 func _ready() -> void:
-	pause()
-	pause()
+	visible = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_pause"):

@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cme2853y0xody"]
 
+[ext_resource type="Script" uid="uid://bur02fg1iwqou" path="res://src/scenes/levels/level_1.gd" id="1_2w2pm"]
 [ext_resource type="Texture2D" uid="uid://cxlo4o87h6j4a" path="res://src/tiles/Beach-and-caves-tileset.png" id="1_pg80c"]
 [ext_resource type="Texture2D" uid="uid://b5jkkrr43qgel" path="res://src/tiles/Game Boy Advance - Pokemon FireRed _ LeafGreen - Tilesets - Tileset 2.png" id="2_h6fog"]
 [ext_resource type="PackedScene" uid="uid://b16rx3qn5ttiq" path="res://src/scenes/player/player.tscn" id="3_ppspy"]
@@ -5423,6 +5424,7 @@ sources/0 = SubResource("TileSetAtlasSource_n2iut")
 sources/1 = SubResource("TileSetAtlasSource_kijk2")
 
 [node name="Level1A" type="Node2D" unique_id=282092962]
+script = ExtResource("1_2w2pm")
 
 [node name="MapaBase" type="Node2D" parent="." unique_id=164572649]
 

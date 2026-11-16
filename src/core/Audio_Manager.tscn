@@ -27,7 +27,7 @@ bus = &"Sfx"
 stream = ExtResource("3_7p0ih")
 bus = &"Sfx"
 
-[node name="DeteccionEnemigo" type="AudioStreamPlayer" parent="." unique_id=310841570]
+[node name="Deteccion_Enemigo" type="AudioStreamPlayer" parent="." unique_id=310841570]
 stream = ExtResource("4_tqfxp")
 bus = &"Sfx"
 
@@ -47,7 +47,7 @@ bus = &"Sfx"
 stream = ExtResource("7_qr6kk")
 bus = &"Sfx"
 
-[node name="DañoEnemigo" type="AudioStreamPlayer" parent="." unique_id=646035050]
+[node name="Danio_Enemigo" type="AudioStreamPlayer" parent="." unique_id=646035050]
 stream = ExtResource("10_brguo")
 bus = &"Sfx"
 
