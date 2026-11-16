@@ -15,6 +15,8 @@ const SHAKE_DURATION: float = 0.3
 const SWORD_DAMAGE: int = 15
 const DAMAGE_COLOR: Color = Color(0.8, 0.1, 0.2, 1.0) 
 const NORMAL_COLOR: Color = Color.WHITE
+const AUDIO_STEP: StringName = &"Paso"
+const AUDIO_SWORD: StringName = &"Espada"
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
@@ -28,7 +30,6 @@ var is_dead: bool = false
 var life: int = 100
 
 func _ready() -> void:
-	animation_sprite.animation_finished.connect(resolve_attack_state)
 	sword_hitbox.monitoring = false
 
 func _input(event: InputEvent) -> void:
@@ -123,13 +124,6 @@ func play_contextual_attack_animation(state: StringName) -> void:
 	var target_animation := StringName("Attack" + state + direction_suffix)
 	
 	animation_sprite.play(target_animation)
-
-func resolve_attack_state() -> void:
-	if not is_attacking:
-		return
-		
-	is_attacking = false
-	sword_hitbox.set_deferred(&"monitoring", false)
 
 func dispatch_animation() -> void:
 	if is_attacking or is_knocked_back or is_dead:
@@ -255,3 +249,35 @@ func _on_sword_hitbox_body_entered(body: Node2D) -> void:
 
 	if body.has_method("process_impact"):
 		body.process_impact(sword_hitbox.global_position)
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	var current_anim: String = animation_sprite.animation
+	var current_frame: int = animation_sprite.frame
+	
+	var audio_trigger_map := {
+		"Walk": {"frames": [1, 3, 5], "sound": AUDIO_STEP},
+		"Run": {"frames": [1, 3, 5], "sound": AUDIO_STEP},
+		"Attack": {"frames": [2], "sound": AUDIO_SWORD}
+	}
+	
+	for action_prefix in audio_trigger_map:
+		if current_anim.begins_with(action_prefix):
+			process_audio_trigger(audio_trigger_map.get(action_prefix), current_frame)
+			return
+
+func process_audio_trigger(config: Dictionary, frame: int) -> void:
+	var valid_frames: Array = config.get("frames", [])
+	
+	if frame not in valid_frames:
+		return
+		
+	var sound_name: StringName = config.get("sound", &"")
+	AudioManager.play(sound_name)
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if not is_attacking:
+		return
+		
+	is_attacking = false
+	sword_hitbox.set_deferred(&"monitoring", false)
