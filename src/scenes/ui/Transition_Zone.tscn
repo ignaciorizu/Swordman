@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dcbml37812xgg"]
 
-[ext_resource type="Script" uid="uid://c06276ojks4bn" path="res://src/scenes/core/transition_zone.gd" id="1_eoh83"]
+[ext_resource type="Script" uid="uid://c06276ojks4bn" path="res://src/scenes/ui/transition_zone.gd" id="1_eoh83"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_if6j7"]
 

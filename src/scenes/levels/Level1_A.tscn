@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bdh84vju4idfh" path="res://src/scenes/levels/objetos.gd" id="5_2w2pm"]
 [ext_resource type="PackedScene" uid="uid://c7t5i77bdwo5f" path="res://src/scenes/enemies/Charmander.tscn" id="6_ppspy"]
 [ext_resource type="PackedScene" uid="uid://djct8bdvwpk12" path="res://src/scenes/enemies/FireBall.tscn" id="7_ftuci"]
-[ext_resource type="PackedScene" uid="uid://dcbml37812xgg" path="res://src/scenes/core/Transition_Zone.tscn" id="8_ftuci"]
+[ext_resource type="PackedScene" uid="uid://dcbml37812xgg" path="res://src/scenes/ui/Transition_Zone.tscn" id="8_ftuci"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixgve"]
 texture = ExtResource("1_pg80c")

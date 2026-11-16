@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://g7puvaaap4e3"]
+
+[ext_resource type="Script" uid="uid://b3l6mhc106hpb" path="res://src/scenes/levels/win_game.gd" id="1_l05cg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_if6j7"]
+font_size = 47
+font_color = Color(0, 0, 0, 1)
+outline_size = 5
+shadow_size = 6
+shadow_color = Color(0.6651194, 0.24073339, 0.41534385, 0)
+
+[node name="WinGame" type="Control" unique_id=641721988]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_l05cg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2067735835]
+layout_mode = 0
+offset_right = 1160.0
+offset_bottom = 649.0
+
+[node name="Label" type="Label" parent="." unique_id=1199270544]
+layout_mode = 0
+offset_right = 1157.0
+offset_bottom = 648.0
+text = "Ganaste"
+label_settings = SubResource("LabelSettings_if6j7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Continue_Button" type="Button" parent="." unique_id=961023189]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 474.0
+offset_top = 373.0
+offset_right = 690.0
+offset_bottom = 442.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continuar"
+icon_alignment = 1
+
+[connection signal="pressed" from="Continue_Button" to="." method="_on_continue_button_pressed"]

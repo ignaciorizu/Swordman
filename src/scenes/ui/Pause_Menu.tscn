@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dajdjbekv5gjh"]
+
+[ext_resource type="Script" uid="uid://ie7pt2d764wd" path="res://src/scenes/ui/pause_menu.gd" id="1_nc02c"]
+[ext_resource type="Texture2D" uid="uid://dud7bodklff1y" path="res://src/sprites/fondos/PauseMenu.png" id="2_ckw62"]
+[ext_resource type="StyleBox" uid="uid://blqbol46k44lp" path="res://src/scenes/ui/ButtonColorNormal.tres" id="3_aj44l"]
+[ext_resource type="FontFile" uid="uid://bisv5gd7obava" path="res://src/scenes/ui/kenney-pixel.otf" id="3_xrq8x"]
+[ext_resource type="StyleBox" uid="uid://bjd3bphfl0ihs" path="res://src/scenes/ui/ButtonColorPressHover.tres" id="4_xrq8x"]
+
+[node name="PauseMenu" type="Control" unique_id=376256505]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nc02c")
+
+[node name="Panel" type="Panel" parent="." unique_id=1440020813]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="NinePatchRect" parent="." unique_id=1610842951]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.625
+offset_top = -126.49652
+offset_right = 400.625
+offset_bottom = 126.49652
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ckw62")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1151306992]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -100.0
+offset_right = 67.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Resume_Buttom" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1721427181]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("3_xrq8x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_aj44l")
+theme_override_styles/pressed = ExtResource("4_xrq8x")
+theme_override_styles/hover = ExtResource("4_xrq8x")
+text = "CONTINUAR"
+
+[node name="Restart_Buttom" type="Button" parent="PanelContainer/VBoxContainer" unique_id=312423601]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("3_xrq8x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_aj44l")
+theme_override_styles/pressed = ExtResource("4_xrq8x")
+theme_override_styles/hover = ExtResource("4_xrq8x")
+text = "REINICIO"
+
+[node name="Main_Menu_Buttom" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1441761601]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("3_xrq8x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_aj44l")
+theme_override_styles/pressed = ExtResource("4_xrq8x")
+theme_override_styles/hover = ExtResource("4_xrq8x")
+text = "MENU PRINCIPAL"
+
+[node name="Exit_Buttom" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1161547222]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("3_xrq8x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_aj44l")
+theme_override_styles/pressed = ExtResource("4_xrq8x")
+theme_override_styles/hover = ExtResource("4_xrq8x")
+text = "SALIR"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume_Buttom" to="." method="_on_resume_buttom_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart_Buttom" to="." method="_on_restart_buttom_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Main_Menu_Buttom" to="." method="_on_main_menu_buttom_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Exit_Buttom" to="." method="_on_exit_buttom_pressed"]

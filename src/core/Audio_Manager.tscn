@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dvw2ysds5ylbr"]
+
+[ext_resource type="AudioStream" uid="uid://bkk8oky5jewsw" path="res://src/sounds/Jeremy Blake - Powerup!.mp3" id="1_hvw1a"]
+[ext_resource type="Script" uid="uid://balloov2ev0u6" path="res://src/core/audio_manager.gd" id="1_wdvhg"]
+[ext_resource type="AudioStream" uid="uid://rmhsqfaf2vlc" path="res://src/sounds/sfx_hurt.ogg" id="2_wdvhg"]
+[ext_resource type="AudioStream" uid="uid://bubt1y1wduixi" path="res://src/sounds/Select_Button.mp3" id="3_7p0ih"]
+[ext_resource type="AudioStream" uid="uid://dnf7m701usn3o" path="res://src/sounds/DeteccionEnemigo.mp3" id="4_tqfxp"]
+[ext_resource type="AudioStream" uid="uid://dyl6344ifvaec" path="res://src/sounds/Espada.mp3" id="5_brguo"]
+[ext_resource type="AudioStream" uid="uid://b5u7yuuqu20q7" path="res://src/sounds/Pasos.mp3" id="6_ngyvr"]
+[ext_resource type="AudioStream" uid="uid://cmkc6jm5jas8y" path="res://src/sounds/sfx_magic.ogg" id="7_qr6kk"]
+[ext_resource type="AudioStream" uid="uid://daerqnd27pefl" path="res://src/sounds/sfx_bump.ogg" id="8_7p0ih"]
+[ext_resource type="AudioStream" uid="uid://vyqvmoy5yb12" path="res://src/sounds/659370__lilmati__retro-footsteps.wav" id="10_tqfxp"]
+
+[node name="AudioManager" type="Node" unique_id=692520715]
+script = ExtResource("1_wdvhg")
+
+[node name="Fondo" type="AudioStreamPlayer" parent="." unique_id=743980144]
+stream = ExtResource("1_hvw1a")
+
+[node name="Daño" type="AudioStreamPlayer" parent="." unique_id=1321928763]
+stream = ExtResource("2_wdvhg")
+
+[node name="SelectButton" type="AudioStreamPlayer" parent="." unique_id=81291871]
+stream = ExtResource("3_7p0ih")
+
+[node name="DeteccionEnemigo" type="AudioStreamPlayer" parent="." unique_id=310841570]
+stream = ExtResource("4_tqfxp")
+
+[node name="Espada" type="AudioStreamPlayer" parent="." unique_id=1493647999]
+stream = ExtResource("5_brguo")
+
+[node name="Pasos" type="AudioStreamPlayer" parent="." unique_id=909867446]
+stream = ExtResource("6_ngyvr")
+
+[node name="SfxBump" type="AudioStreamPlayer" parent="." unique_id=1776149337]
+stream = ExtResource("8_7p0ih")
+
+[node name="Shoot" type="AudioStreamPlayer" parent="." unique_id=1392574338]
+stream = ExtResource("7_qr6kk")
+
+[node name="Paso" type="AudioStreamPlayer" parent="." unique_id=26599483]
+stream = ExtResource("10_tqfxp")

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bx7so4hnmutjc"]
+
+[ext_resource type="Script" uid="uid://cxrmc26cmod4c" path="res://src/scenes/levels/game_over.gd" id="1_retr8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghd5h"]
+font_size = 47
+font_color = Color(0, 0, 0, 1)
+outline_size = 5
+shadow_size = 6
+shadow_color = Color(0.6651194, 0.24073339, 0.41534385, 0)
+
+[node name="GameOver" type="Node2D" unique_id=311053440]
+script = ExtResource("1_retr8")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=6191253]
+offset_right = 1160.0
+offset_bottom = 649.0
+
+[node name="Label" type="Label" parent="." unique_id=1000728544]
+offset_right = 1157.0
+offset_bottom = 648.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_ghd5h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Retry_Button" type="Button" parent="." unique_id=33803735]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 467.0
+offset_top = 374.0
+offset_right = 683.0
+offset_bottom = 443.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reintentar"
+icon_alignment = 1
+
+[connection signal="pressed" from="Retry_Button" to="." method="_on_retry_button_pressed"]

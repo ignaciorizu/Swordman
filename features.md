@@ -25,7 +25,7 @@ Mundo
 6. mochila para los objetos
 7. los objetos de más de una capa se vuelvan opacos si estan con el personaje debajo
 8. HUD
-9. menu de pausa
+9. menu de pausa 🟢
 10. pantalla de GameOver
 
 Enemigos

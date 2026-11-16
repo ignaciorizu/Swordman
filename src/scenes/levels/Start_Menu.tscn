@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bgauicmgobhun"]
+
+[ext_resource type="Script" uid="uid://grkbkgpwj0ka" path="res://src/scenes/levels/start_menu.gd" id="1_6csu8"]
+[ext_resource type="Texture2D" uid="uid://ucydppmu05nn" path="res://src/sprites/fondos/StartMenu.jpg" id="1_iimtl"]
+[ext_resource type="FontFile" uid="uid://bisv5gd7obava" path="res://src/scenes/ui/kenney-pixel.otf" id="2_iitsm"]
+[ext_resource type="StyleBox" uid="uid://blqbol46k44lp" path="res://src/scenes/ui/ButtonColorNormal.tres" id="2_jo5p6"]
+[ext_resource type="StyleBox" uid="uid://bjd3bphfl0ihs" path="res://src/scenes/ui/ButtonColorPressHover.tres" id="3_a7rqg"]
+
+[node name="StartMenu" type="Control" unique_id=1951915235]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6csu8")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1715761526]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -583.52344
+offset_top = -325.6875
+offset_right = 583.52344
+offset_bottom = 325.6875
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iimtl")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1755164781]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.5
+offset_top = -112.5
+offset_right = 107.5
+offset_bottom = 112.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer" unique_id=1465755019]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("2_iitsm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("2_jo5p6")
+theme_override_styles/pressed = ExtResource("3_a7rqg")
+theme_override_styles/hover = ExtResource("3_a7rqg")
+text = "JUGAR"
+
+[node name="Options" type="Button" parent="VBoxContainer" unique_id=1341179057]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("2_iitsm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("2_jo5p6")
+theme_override_styles/pressed = ExtResource("3_a7rqg")
+theme_override_styles/hover = ExtResource("3_a7rqg")
+text = "OPCIONES"
+
+[node name="Credits" type="Button" parent="VBoxContainer" unique_id=1779375568]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("2_iitsm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("2_jo5p6")
+theme_override_styles/pressed = ExtResource("3_a7rqg")
+theme_override_styles/hover = ExtResource("3_a7rqg")
+text = "CREDITOS"
+
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=890010111]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9490196, 0.9098039, 0.7882353, 1)
+theme_override_fonts/font = ExtResource("2_iitsm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("2_jo5p6")
+theme_override_styles/pressed = ExtResource("3_a7rqg")
+theme_override_styles/hover = ExtResource("3_a7rqg")
+text = "SALIR"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
