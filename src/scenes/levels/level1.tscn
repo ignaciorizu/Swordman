@@ -4743,7 +4743,7 @@ tile_set = SubResource("TileSet_if6j7")
 [node name="Player" parent="." unique_id=776580473 instance=ExtResource("2_16xk7")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-637, 179)
+position = Vector2(-770, -350)
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=1394154445]
 
@@ -4839,6 +4839,6 @@ target_scene_path = "uid://cme2853y0xody"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1009698358]
 
-[node name="PauseMenu" parent="CanvasLayer" unique_id=376256505 instance=ExtResource("8_72rjg")]
-
 [node name="Hud" parent="CanvasLayer" unique_id=1830582752 instance=ExtResource("9_8fasg")]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=376256505 instance=ExtResource("8_72rjg")]

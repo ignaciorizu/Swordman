@@ -275,7 +275,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	var audio_trigger_map := {
 		"Walk": {"frames": [1, 3, 5], "sound": AUDIO_STEP},
 		"Run": {"frames": [1, 3, 5], "sound": AUDIO_STEP},
-		"Attack": {"frames": [0], "sound": AUDIO_SWORD},
+		"Attack": {"frames": [1], "sound": AUDIO_SWORD},
 		"Hurt": {"frames": [1], "sound": AUDIO_DAMAGE}
 	}
 	

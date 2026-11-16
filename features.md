@@ -8,7 +8,7 @@ Jugador
 7. vida 🟢
 8. daño recibido 🟢
 9. muerte animacion 🟢
-10. muerte fin del juego
+10. muerte fin del juego 🟢
 11. posicion de recuperar vida
 	EXTRAS
 	12. Exp
@@ -24,7 +24,7 @@ Mundo
 5. checkpoint
 6. mochila para los objetos
 7. los objetos de más de una capa se vuelvan opacos si estan con el personaje debajo
-8. HUD
+8. HUD 🟢
 9. menu de pausa 🟢
 10. pantalla de GameOver
 
