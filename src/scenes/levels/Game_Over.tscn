@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bx7so4hnmutjc"]
 
 [ext_resource type="Script" uid="uid://cxrmc26cmod4c" path="res://src/scenes/levels/game_over.gd" id="1_retr8"]
+[ext_resource type="Texture2D" uid="uid://ucydppmu05nn" path="res://src/sprites/fondos/StartMenu.jpg" id="2_3r2df"]
 [ext_resource type="FontFile" uid="uid://bisv5gd7obava" path="res://src/scenes/ui/kenney-pixel.otf" id="2_gfdkl"]
 [ext_resource type="StyleBox" uid="uid://blqbol46k44lp" path="res://src/scenes/ui/ButtonColorNormal.tres" id="3_3r2df"]
 [ext_resource type="StyleBox" uid="uid://bjd3bphfl0ihs" path="res://src/scenes/ui/ButtonColorPressHover.tres" id="4_4tjvj"]
@@ -29,11 +30,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_retr8")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1785034972]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -583.52344
+offset_top = -325.6875
+offset_right = 583.52344
+offset_bottom = 325.6875
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3r2df")
+expand_mode = 1
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=6191253]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 417.0
+offset_top = 208.0
+offset_right = -415.0
+offset_bottom = -240.0
 grow_horizontal = 2
 grow_vertical = 2
 

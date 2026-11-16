@@ -1,3 +1,63 @@
 [gd_scene format=3 uid="uid://c7tmusfyedehs"]
 
-[node name="Creditos" type="Node2D" unique_id=1042619037]
+[ext_resource type="Script" uid="uid://bgo853cu4fi02" path="res://src/scenes/levels/creditos.gd" id="1_5vok4"]
+[ext_resource type="FontFile" uid="uid://bisv5gd7obava" path="res://src/scenes/ui/kenney-pixel.otf" id="2_3vad7"]
+
+[node name="Credits" type="Control" unique_id=1109794608]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5vok4")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1371548950]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16862746, 0.12941177, 0.09411765, 1)
+
+[node name="ClipContainer" type="Control" parent="." unique_id=1542923465]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsText" type="RichTextLabel" parent="ClipContainer" unique_id=784217844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="BackButton" type="Button" parent="." unique_id=1224661069]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -69.0
+offset_right = 48.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_3vad7")
+theme_override_font_sizes/font_size = 40
+text = "Volver"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

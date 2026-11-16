@@ -27,6 +27,7 @@ const DIR_UP: StringName = &"Up"
 const DIR_DOWN: StringName = &"Down"
 const AUDIO_ENEMY_DAMAGE: StringName = &"Danio_Enemigo"
 const AUDIO_ENEMY_DETECTION: StringName = &"Deteccion_Enemigo"
+const AUDIO_ENEMY_SHOOT: StringName = &"Shoot"
 
 @export var combat_mode: CombatMode = CombatMode.MELEE
 @export var fire_ball: PackedScene
@@ -184,6 +185,7 @@ func instantiate_fireball() -> void:
 	new_fire_ball.move_direction = global_position.direction_to(player.global_position)
 	new_fire_ball.speed = fire_ball_speed
 	new_fire_ball.damage = fire_ball_damage
+	AudioManager.play(AUDIO_ENEMY_SHOOT)
 
 	var level_root: Node = get_tree().current_scene
 	if is_instance_valid(level_root):

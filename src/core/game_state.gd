@@ -9,6 +9,7 @@ const TIMER_INTERVAL: float = 1.0
 const DEATH_CAUSE_TIMEOUT: StringName = &"Tiempo Agotado"
 const DEATH_CAUSE_UNKNOWN: StringName = &"Desconocida"
 const GAME_OVER_SCENE_PATH: String = "res://src/scenes/levels/Game_Over.tscn"
+const AUDIO_GAME_OVER: StringName = &"Game_Over"
 
 var current_player_health: int = MAX_PLAYER_HEALTH
 var corrupted_essences: int = INITIAL_ESSENCES
@@ -64,7 +65,8 @@ func transition_to_game_over() -> void:
 	if not ResourceLoader.exists(GAME_OVER_SCENE_PATH):
 		push_error("Ruta de escena Game Over invalida: " + GAME_OVER_SCENE_PATH)
 		return
-		
+	
+	AudioManager.play(AUDIO_GAME_OVER)
 	get_tree().paused = false
 	get_tree().change_scene_to_file(GAME_OVER_SCENE_PATH)
 

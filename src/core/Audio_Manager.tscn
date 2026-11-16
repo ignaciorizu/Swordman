@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://daerqnd27pefl" path="res://src/sounds/sfx_bump.ogg" id="8_7p0ih"]
 [ext_resource type="AudioStream" uid="uid://c40xg617l44pp" path="res://src/sounds/sfx_throw.ogg" id="10_brguo"]
 [ext_resource type="AudioStream" uid="uid://rdw0daxogmcf" path="res://src/sounds/GameOver.wav" id="11_ngyvr"]
+[ext_resource type="AudioStream" uid="uid://c38jwlixevj53" path="res://src/sounds/sfx_coin.ogg" id="12_ngyvr"]
 
 [node name="AudioManager" type="Node" unique_id=692520715]
 script = ExtResource("1_wdvhg")
@@ -55,3 +56,6 @@ bus = &"Sfx"
 [node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1287780606]
 stream = ExtResource("11_ngyvr")
 bus = &"Sfx"
+
+[node name="Item" type="AudioStreamPlayer" parent="." unique_id=2025576731]
+stream = ExtResource("12_ngyvr")

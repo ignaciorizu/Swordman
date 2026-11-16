@@ -4743,7 +4743,7 @@ tile_set = SubResource("TileSet_if6j7")
 [node name="Player" parent="." unique_id=776580473 instance=ExtResource("2_16xk7")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-770, -350)
+position = Vector2(-645, 184)
 
 [node name="Enemigos" type="Node2D" parent="." unique_id=1394154445]
 

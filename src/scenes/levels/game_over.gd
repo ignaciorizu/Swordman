@@ -9,6 +9,7 @@ const LABEL_PREFIX_TIME_REMAINING: String = "Tiempo Restante: "
 const LABEL_PREFIX_CAUSE: String = "Causa: "
 const LEVEL_1_SCENE_PATH: String = "res://src/scenes/levels/Level1.tscn"
 const MAIN_MENU_SCENE_PATH: String = "res://src/scenes/levels/Start_Menu.tscn"
+const AUDIO_BUTTON: StringName = &"SelectButton"
 
 @onready var score_label: Label = $Status/Score
 @onready var time_played_label: Label = $Status/TimePlayed
@@ -53,12 +54,15 @@ func format_seconds_to_clock(total_seconds: int) -> String:
 	return TIME_FORMAT_TEMPLATE % [minutes, seconds]
 
 func _on_retry_button_pressed() -> void:
+	AudioManager.play(AUDIO_BUTTON)
 	navigate_to_scene(LEVEL_1_SCENE_PATH)
 
 func _on_main_menu_button_pressed() -> void:
+	AudioManager.play(AUDIO_BUTTON)
 	navigate_to_scene(MAIN_MENU_SCENE_PATH)
 
 func _on_exit_button_pressed() -> void:
+	AudioManager.play(AUDIO_BUTTON)
 	get_tree().quit()
 
 func navigate_to_scene(target_path: String) -> void:
