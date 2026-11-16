@@ -15,6 +15,3 @@ solucion:
 	level_root.add_child(new_fire_ball) 
 	
 3. Que hacer con los enemigos muertos en lo que desaparecen para poder pasar por encima
-
-4. Hacer que al pausar al estar caminando se vuelva a comprobar que se esta caminando.
-	tambien hacer que cuando una esta caminado a la derecha, va a abajo sin soltar la derecha y suelta abajo, siga a la derecha porque se esta presionando.

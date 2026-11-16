@@ -9,14 +9,15 @@ const RUN_SPEED_MULTIPLIER: float = 1.6
 const HITBOX_OFFSET: float = 20.0
 const KNOCKBACK_FORCE: float = 120.0
 const KNOCKBACK_DURATION: float = 0.2
-const INVULNERABILITY_DURATION: float = 1.0
+const INVULNERABILITY_DURATION: float = 0.5
 const SHAKE_INTENSITY: float = 4.0
 const SHAKE_DURATION: float = 0.3
 const SWORD_DAMAGE: int = 15
 const DAMAGE_COLOR: Color = Color(0.8, 0.1, 0.2, 1.0) 
 const NORMAL_COLOR: Color = Color.WHITE
-const AUDIO_STEP: StringName = &"Paso"
+const AUDIO_STEP: StringName = &"Pasos"
 const AUDIO_SWORD: StringName = &"Espada"
+const AUDIO_DAMAGE: StringName = &"Danio"
 
 var active_movement_input: StringName = &""
 var current_facing_direction: StringName = &"ui_down"
@@ -34,10 +35,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	process_attack_input(event, &"ui_attack")
-	process_directional_input(event, &"ui_up")
-	process_directional_input(event, &"ui_down")
-	process_directional_input(event, &"ui_left")
-	process_directional_input(event, &"ui_right")
 
 func process_attack_input(event: InputEvent, action: StringName) -> void:
 	if not event.is_action_pressed(action) or is_attacking or is_dead:
@@ -61,13 +58,25 @@ func update_velocity() -> void:
 	if is_knocked_back:
 		return
 
-	if active_movement_input.is_empty() or is_attacking or is_dead:
+	if is_attacking or is_dead:
 		velocity = Vector2.ZERO
 		return
 
-	var direction_vector: Vector2 = calculate_direction_vector(active_movement_input)
-	var velocity_player: float = calculate_movement_speed()
-	velocity = direction_vector * velocity_player
+	var input_vector: Vector2 = Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+	
+	if input_vector == Vector2.ZERO:
+		velocity = Vector2.ZERO
+		return
+		
+	resolve_facing_direction(input_vector)
+	var current_speed: float = calculate_movement_speed()
+	velocity = input_vector * current_speed
+	
+func resolve_facing_direction(direction: Vector2) -> void:
+	if direction.x != 0.0:
+		current_facing_direction = &"ui_right" if direction.x > 0 else &"ui_left"
+	elif direction.y != 0.0:
+		current_facing_direction = &"ui_down" if direction.y > 0 else &"ui_up"
 
 func calculate_direction_vector(input_move: StringName) -> Vector2:
 	var direction_map := {
@@ -106,10 +115,13 @@ func apply_hitbox_transform() -> void:
 	sword_hitbox.rotation = transform_data.get("rotation")
 
 func determine_movement_state() -> StringName:
-	if active_movement_input.is_empty():
+	var input_vector: Vector2 = Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+	if input_vector == Vector2.ZERO:
 		return &"Idle"
+	
 	if Input.is_action_pressed(&"ui_run") and run_ability_unlock:
 		return &"Run"
+		
 	return &"Walk"
 
 func play_contextual_attack_animation(state: StringName) -> void:
@@ -129,7 +141,9 @@ func dispatch_animation() -> void:
 	if is_attacking or is_knocked_back or is_dead:
 		return
 		
-	if active_movement_input.is_empty():
+	var input_vector: Vector2 = Input.get_vector(&"ui_left", &"ui_right", &"ui_up", &"ui_down")
+	
+	if input_vector == Vector2.ZERO:
 		play_idle_animation()
 	elif Input.is_action_pressed(&"ui_run") and run_ability_unlock:
 		play_run_animation()
@@ -257,7 +271,8 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	var audio_trigger_map := {
 		"Walk": {"frames": [1, 3, 5], "sound": AUDIO_STEP},
 		"Run": {"frames": [1, 3, 5], "sound": AUDIO_STEP},
-		"Attack": {"frames": [2], "sound": AUDIO_SWORD}
+		"Attack": {"frames": [0], "sound": AUDIO_SWORD},
+		"Hurt": {"frames": [1], "sound": AUDIO_DAMAGE}
 	}
 	
 	for action_prefix in audio_trigger_map:

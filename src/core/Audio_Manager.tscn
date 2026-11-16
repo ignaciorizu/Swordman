@@ -9,34 +9,48 @@
 [ext_resource type="AudioStream" uid="uid://b5u7yuuqu20q7" path="res://src/sounds/Pasos.mp3" id="6_ngyvr"]
 [ext_resource type="AudioStream" uid="uid://cmkc6jm5jas8y" path="res://src/sounds/sfx_magic.ogg" id="7_qr6kk"]
 [ext_resource type="AudioStream" uid="uid://daerqnd27pefl" path="res://src/sounds/sfx_bump.ogg" id="8_7p0ih"]
-[ext_resource type="AudioStream" uid="uid://vyqvmoy5yb12" path="res://src/sounds/659370__lilmati__retro-footsteps.wav" id="10_tqfxp"]
+[ext_resource type="AudioStream" uid="uid://c40xg617l44pp" path="res://src/sounds/sfx_throw.ogg" id="10_brguo"]
+[ext_resource type="AudioStream" uid="uid://rdw0daxogmcf" path="res://src/sounds/GameOver.wav" id="11_ngyvr"]
 
 [node name="AudioManager" type="Node" unique_id=692520715]
 script = ExtResource("1_wdvhg")
 
 [node name="Fondo" type="AudioStreamPlayer" parent="." unique_id=743980144]
 stream = ExtResource("1_hvw1a")
+bus = &"Fondo"
 
-[node name="Daño" type="AudioStreamPlayer" parent="." unique_id=1321928763]
+[node name="Danio" type="AudioStreamPlayer" parent="." unique_id=1321928763]
 stream = ExtResource("2_wdvhg")
+bus = &"Sfx"
 
 [node name="SelectButton" type="AudioStreamPlayer" parent="." unique_id=81291871]
 stream = ExtResource("3_7p0ih")
+bus = &"Sfx"
 
 [node name="DeteccionEnemigo" type="AudioStreamPlayer" parent="." unique_id=310841570]
 stream = ExtResource("4_tqfxp")
+bus = &"Sfx"
 
 [node name="Espada" type="AudioStreamPlayer" parent="." unique_id=1493647999]
 stream = ExtResource("5_brguo")
+bus = &"Sfx"
 
 [node name="Pasos" type="AudioStreamPlayer" parent="." unique_id=909867446]
 stream = ExtResource("6_ngyvr")
+bus = &"Sfx"
 
 [node name="SfxBump" type="AudioStreamPlayer" parent="." unique_id=1776149337]
 stream = ExtResource("8_7p0ih")
+bus = &"Sfx"
 
 [node name="Shoot" type="AudioStreamPlayer" parent="." unique_id=1392574338]
 stream = ExtResource("7_qr6kk")
+bus = &"Sfx"
 
-[node name="Paso" type="AudioStreamPlayer" parent="." unique_id=26599483]
-stream = ExtResource("10_tqfxp")
+[node name="DañoEnemigo" type="AudioStreamPlayer" parent="." unique_id=646035050]
+stream = ExtResource("10_brguo")
+bus = &"Sfx"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="." unique_id=1287780606]
+stream = ExtResource("11_ngyvr")
+bus = &"Sfx"
